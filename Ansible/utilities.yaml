@@ -1,0 +1,10 @@
+---
+- name: Install Basic Utilities
+  hosts: all
+  become: true
+  tasks:
+    - name: "Install Vim"
+      apt: name=vim state=latest update_cache=yes
+
+    - name: "Install Nmap"
+      apt: name=nmap state=latest update_cache=yes

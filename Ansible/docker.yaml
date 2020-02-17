@@ -1,0 +1,11 @@
+---
+- name: Install Docker
+  hosts: all
+  become: true
+  vars:
+    docker_users:
+      - pi
+    docker_install_compose: false
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker_arm
