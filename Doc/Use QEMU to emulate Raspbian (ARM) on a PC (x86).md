@@ -8,9 +8,9 @@ Using QEMU is quite complicated and may need a lot of patience. The following st
 
 1. Install QEMU: www.qemu.org
 
-   ```bash
+```bash
 sudo apt install qemu bridge-utils ifupdown
-   ```
+```
    
 2. Download Raspbian Buster Lite: www.raspberrypi.org/downloads/raspbian/
 
@@ -18,13 +18,13 @@ sudo apt install qemu bridge-utils ifupdown
 
    Place everything you have downloaded into one folder. It should include these files:
 
-   ```
+   ```bash
    - 2020-02-05-raspbian-buster-lite.img
    - versatile-pb.dtb
    - kernel-qemu-4.19.50-buster
    ```
 
-7. Resize Raspbian
+3. Resize Raspbian
 
    ```bash
    qemu-img convert -f raw -O qcow2 2020-02-13-raspbian-buster-lite.img 2020-02-13-raspbian-buster-lite.qcow2
@@ -32,7 +32,7 @@ sudo apt install qemu bridge-utils ifupdown
    qemu-img resize 2020-02-13-raspbian-buster-lite.qcow2 +5G
    ```
 
-4. Setup Bridge
+4. Setup Network Bridge
 
    ```bash
    # find your network device e.g. ethernet enp0
