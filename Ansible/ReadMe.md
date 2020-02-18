@@ -8,13 +8,3 @@ For example, installing utilities such as vim (see utilities.yaml) on all server
 # run ansible playbook called utilities.yaml
 ansible-playbook utilities.yaml -i inventory.ini
 ```
-
-Some ansible scrips have some dependencies e.g. docker.yaml
-The following dependencies need to be installed first:
-
-```bash
-# dependencies for docker on raspbian
-ansible-galaxy install geerlingguy.pip
-ansible-galaxy install geerlingguy.docker_arm
-```
-
