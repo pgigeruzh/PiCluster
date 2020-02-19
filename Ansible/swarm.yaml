@@ -13,6 +13,6 @@
     - name: Join Swarm
       docker_swarm:
         state: join
-        advertise_addr: "{{ hostvars[groups['docker_swarm_manager'][0]]['ansible_eth0']['ipv4']['address'] }}"
+        advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
         remote_addrs: "{{ hostvars[groups['docker_swarm_manager'][0]]['ansible_eth0']['ipv4']['address'] }}:2377"
         join_token: "{{ hostvars['raspberrypi0']['token']['swarm_facts']['JoinTokens']['Worker'] }}"
