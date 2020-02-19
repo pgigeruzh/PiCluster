@@ -52,21 +52,3 @@
 
     - name: Reboot
       reboot:
-
-- name: Init Swarm Managers
-  hosts: docker_swarm_manager
-  tasks:
-    - name: Init Swarm
-      docker_swarm:
-        state: present
-      register: token
-
-- name: Init Swarm Workers
-  hosts: docker_swarm_workers
-  tasks:
-    - name: Join Swarm
-      docker_swarm:
-        state: join
-        advertise_addr: "{{ hostvars[groups['docker_swarm_manager'][0]]['ansible_eth0']['ipv4']['address'] }}"
-        remote_addrs: "{{ hostvars[groups['docker_swarm_manager'][0]]['ansible_eth0']['ipv4']['address'] }}:2377"
-        join_token: "{{ hostvars['raspberrypi0']['token']['swarm_facts']['JoinTokens']['Worker'] }}"

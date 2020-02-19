@@ -8,3 +8,6 @@
 
     - name: "Install Nmap"
       apt: name=nmap state=latest update_cache=yes
+
+    - name: "Install Git"
+      apt: name=git state=latest update_cache=yes
