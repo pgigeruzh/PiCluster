@@ -9,9 +9,7 @@ Creating user "hduser" and creating ssh keys
 sudo addgroup hadoop  
 sudo adduser --ingroup hadoop hduser  
 sudo adduser hduser sudo  
-```
 
-```bash
 #login as hduser and create ssh keys 
 su hduser
 cd ~  
