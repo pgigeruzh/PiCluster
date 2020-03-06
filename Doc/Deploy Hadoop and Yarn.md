@@ -1,4 +1,5 @@
 # Installation of Hadoop on 1 Master and 2 Slaves
+# Part 1: Installing Hadoop on MasterNode
 
 (raspberrypi4 --> IP: 192.168.1.187)
 
@@ -178,7 +179,7 @@ nano mapred-site.xml
 </property> 
  
 ```
-Starting the cluster
+Starting the Master
 
 ```bash
 # Preparing and Booting HDFS
@@ -200,6 +201,7 @@ One should be able to see:
 - Datanode (if configured)
 - JPS
 
+# Part 2: Installing Hadoop on Slaves and connecting them to Master
 
 
 ```bash
