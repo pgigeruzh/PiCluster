@@ -203,21 +203,80 @@ One should be able to see:
 
 # Part 2: Installing Hadoop on Slaves and connecting them to Master
 
+This must be done on the master
+```bash
+# 
+cd /etc
+sudo nano hosts
+
+#add the following lines (1 Master and 2 Slaves)
+192.168.1.187  raspberrypi4
+192.168.1.188  raspberrypi5
+192.168.1.189  raspberrypi6
+
+
+```
+This must be done on the slaves: Java and openSSH-Server needs to be installed 
+
+
+```bash
+# create "hduser" on every slave
+sudo addgroup hadoop  
+sudo adduser --ingroup hadoop hduser  
+sudo adduser hduser sudo  
+```
+
+```bash
+#install openssh-server
+ sudo apt-get -y install openssh-server 
+```
+
+On the MasterNode
+
+```bash
+#enable passwordless ssh from Master to Slaves 
+su hduser  
+ssh-keygen  
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys  
+chmod 0600 ~/.ssh/authorized_keys  
+ssh-copy-id hduser@raspberrypi5 (!!!Repeat for each slave node!!!)  
+ssh hduser@raspberrypi5 
+
+ 
+```
+
+```bash
+# Zip and transfer Haddop Files to Slaves (Repeat for each slave)
+zip -r hadoop-2.7.1-with-armhf-drivers.zip /opt/hadoop-2.7.1/  
+
+scp hadoop-2.7.1-with-armhf-drivers.zip hduser@raspberrypi5.local:~  
+ssh hduser@raspberrypi5.local  
+sudo unzip hadoop-2.7.1-with-armhf-drivers.zip -d /  
+sudo chown -R hduser:hadoop /opt/hadoop-2.7.1/  
+rm hadoop-2.7.1-with-armhf-drivers.zip  
+exit  
+scp .bashrc hduser@raspberrypi5.local:~/.bashrc  
+ 
+```
+
+```bash
+# Wipe HDFS
+rm -rf /hdfs/tmp/*  
+
+ 
+```
 
 ```bash
 #
  
 ```
 
-
 ```bash
 #
  
 ```
 
-
 ```bash
 #
  
 ```
-
