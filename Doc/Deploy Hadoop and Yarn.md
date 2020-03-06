@@ -67,10 +67,10 @@ export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre/
 ```
 
 
-
-
 ```bash
-# Stay in the same directory and edit the core-site.xml file
+# Stay in the same directory andput the XML-part into the core-site.xml file
+
+nano core-site.xml
 
 <property>
   <name>fs.default.name</name>
@@ -86,13 +86,15 @@ export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm-vfp-hflt/jre/
 
 
 ```bash
-# Stay in the same directory and edit the hdfs-site.xml file
+# Stay in the same directory and put the XML-part into the hdfs-site.xml file
+
+nano hdfs-site.xml
+
 <property>
     <name>dfs.replication</name>
     <value>1</value>
 </property>
 
- 
 ```
 
 
@@ -131,7 +133,7 @@ nano mapred-site.xml
 
 
 ```bash
-# Stay in same directory and edit yarn-site.xml
+# Stay in same directory and put the XML-part into yarn-site.xml
 
  <property>
     <name>yarn.nodemanager.aux-services</name>
@@ -163,19 +165,20 @@ nano mapred-site.xml
   </property>
 
 <property>  
-<name>yarn.resourcemanager.resource-tracker.address</name>  
-<value>raspberrypi4:8025</value>  
+  <name>yarn.resourcemanager.resource-tracker.address</name>  
+  <value>raspberrypi4:8025</value>  
 </property>  
 <property>  
-<name>yarn.resourcemanager.scheduler.address</name>  
-<value>raspberrypi4:8030</value>  
+  <name>yarn.resourcemanager.scheduler.address</name>  
+  <value>raspberrypi4:8030</value>  
 </property>  
 <property>  
-<name>yarn.resourcemanager.address</name>  
-<value>raspberrypi4:8040</value>  
+  <name>yarn.resourcemanager.address</name>  
+  <value>raspberrypi4:8040</value>  
 </property> 
  
 ```
+Starting the cluster
 
 ```bash
 # Preparing and Booting HDFS
