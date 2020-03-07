@@ -332,33 +332,5 @@ One should be able to see:
 - NodeeManager //YARN
 - JPS
 
-```bash
-# 
-
-```
-
-
-```bash
-# 
-
-```
-
-
-```bash
-# 
-
-```
-
-
-```bash
-# 
-
-```
-
-
-```bash
-# 
-
-```
 
 
