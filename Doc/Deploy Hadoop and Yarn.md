@@ -198,7 +198,6 @@ One should be able to see:
 - NameNode
 - SecondaryNameNode
 - RessourceManager //YARN
-- Datanode (if configured)
 - JPS
 
 # Part 2: Installing Hadoop on Slaves and connecting them to Master
@@ -239,7 +238,7 @@ su hduser
 ssh-keygen  
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys  
 chmod 0600 ~/.ssh/authorized_keys  
-ssh-copy-id hduser@raspberrypi5 (!!!Repeat for each slave node!!!)  
+ssh-copy-id hduser@raspberrypi5 #(!!!Repeat for each slave node!!!)  
 ssh hduser@raspberrypi5 
 
  
@@ -265,18 +264,101 @@ rm -rf /hdfs/tmp/*
 
  
 ```
-
+On every single node:
 ```bash
-#
- 
+# add this xml property in every yarn-site.xml file between the configurations tags
+sudo nano yarn-site.xml
+
+<property>
+<name>yarn.resourcemanager.resource-tracker.address</name>
+<value>raspberrypi4:8025</value>
+</property>
+<property>
+<name>yarn.resourcemanager.scheduler.address</name>
+<value>raspberrypi4:8030</value>
+</property>
+<property>
+<name>yarn.resourcemanager.address</name>
+<value>raspberrypi4:8040</value>
+</property>
+
 ```
 
 ```bash
-#
- 
+# do the same for the core-site.xml file (Mapreduce Port: 54310, Later for Spark: 9000)
+ <property>
+  <name>fs.default.name</name>
+  <value>hdfs://raspberrypi4:54310</value>
+</property>
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>/hdfs/tmp</value>
+</property>
+
+```
+On the masternode
+```bash
+# edit the slaves file and add the following
+sudo nano slaves
+
+raspberrypi4
+raspberrypi5
+raspberrypi6
+
 ```
 
+
+Start the master and the slaves on the master:
+
 ```bash
-#
- 
+# starting
+start-dfs.sh && start-yarn.sh
+
+# stoping
+stop-dfs.sh && stop-yarn.sh
+
 ```
+To check if installation worked on the Master, enter jps on the MasterNode
+One should be able to see:
+- NameNode
+- SecondaryNameNode
+- RessourceManager //YARN
+- Datanode (if also configured on the master) 
+- JPS
+
+To check if installation worked on the Slaves, enter jps on Slaves
+One should be able to see:
+- DataNode
+- NodeeManager //YARN
+- JPS
+
+```bash
+# 
+
+```
+
+
+```bash
+# 
+
+```
+
+
+```bash
+# 
+
+```
+
+
+```bash
+# 
+
+```
+
+
+```bash
+# 
+
+```
+
+
