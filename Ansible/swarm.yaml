@@ -15,4 +15,86 @@
         state: join
         advertise_addr: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
         remote_addrs: "{{ hostvars[groups['docker_swarm_manager'][0]]['ansible_eth0']['ipv4']['address'] }}:2377"
-        join_token: "{{ hostvars['raspberrypi0']['token']['swarm_facts']['JoinTokens']['Worker'] }}"
+        join_token: "{{ hostvars[groups['docker_swarm_manager'][0]]['token']['swarm_facts']['JoinTokens']['Worker'] }}"
+
+- name: Install GlusterFS
+  hosts: all
+  become: true
+  tasks:
+    - name: "Install Gluster Server"
+      apt: name=glusterfs-server state=latest update_cache=yes
+
+    - name: Enable Gluster Service
+      service:
+        name: glusterd
+        enabled: yes
+
+    - name: Start Gluster Service
+      service:
+        name: glusterd
+        state: started
+
+    - name: Create Folder For GlusterFS
+      file:
+        path: /glusterfs/distributed
+        state: directory
+
+    - name: Install Docker Plugin
+      shell: docker plugin install --alias gluster jmb12686/glusterfs-volume-plugin --grant-all-permissions --disable
+      ignore_errors: yes
+
+    - name: Setup Docker Plugin
+      shell: docker plugin set gluster SERVERS="{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      ignore_errors: yes
+
+    - name: Enable Docker Plugin
+      shell: docker plugin enable gluster
+      ignore_errors: yes
+
+    - name: Create Docker Volume
+      docker_volume:
+        name: gfs
+        driver: gluster
+
+- name: Setup GlusterFS
+  hosts: docker_swarm_manager
+  become: true
+  tasks:
+    - name: Create Gluster Storage Pool
+      gluster_peer:
+        state: present
+        nodes: "{{ groups['docker_swarm_workers'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+
+    - name: Create Gluster Volume
+      gluster_volume:
+        state: present
+        name: gfs
+        replicas: 4
+        force: true
+        bricks: /glusterfs/distributed
+        cluster: "{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
+      run_once: true
+
+- name: Build Spark Image (armhf)
+  hosts: all
+  tasks:
+    - name: Git Clone
+      git:
+        repo: https://github.com/gettyimages/docker-spark.git
+        dest: /home/pi/docker-spark
+
+    - name: Build Spark
+      docker_image:
+        name: docker-spark
+        build:
+          path: /home/pi/docker-spark
+        source: build
+
+- name: Setup Docker
+  hosts: docker_swarm_manager
+  tasks:
+    - name: Create Overlay Network
+      docker_network:
+        name: spark
+        driver: overlay
+        attachable: yes

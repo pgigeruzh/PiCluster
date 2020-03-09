@@ -99,8 +99,11 @@ docker volume create --driver gluster gfs
 Last but not least, the newly created docker volume (gfs) can be attached to containers e.g. Spark:
 
 ```
+# run spark master
+docker service create --name sparkmaster --network spark --constraint=node.role==manager --publish 8080:8080 --publish 7077:7077 --mount source=gfs,destination=/gfs docker-spark bin/spark-class org.apache.spark.deploy.master.Master
+
 # run spark workers
-docker service create --replicas 2 --name sparkworker --network spark --constraint node.labels.type==sparkworker --publish 8081:8081 --mount source=gfs,destination=/gfs docker-spark bin/spark-class org.apache.spark.deploy.worker.Worker spark://sparkmaster:7077
+docker service create --replicas 4 --name sparkworker --network spark --constraint=node.role==worker --publish 8081:8081 --mount source=gfs,destination=/gfs docker-spark bin/spark-class org.apache.spark.deploy.worker.Worker spark://sparkmaster:7077
 
 # to copy a file to glusterfs, mount the volume and run an interactive bash
 docker run -it -v /home/pi/:/data -v gfs:/gfs --net=spark --rm docker-spark bash
