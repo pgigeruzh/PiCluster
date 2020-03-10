@@ -212,6 +212,7 @@ sudo nano hosts
 192.168.1.187  raspberrypi4
 192.168.1.188  raspberrypi5
 192.168.1.189  raspberrypi6
+192.168.1.192  cluster3raspberry3
 
 
 ```
@@ -254,7 +255,7 @@ sudo unzip hadoop-2.7.1-with-armhf-drivers.zip -d /
 sudo chown -R hduser:hadoop /opt/hadoop-2.7.1/  
 rm hadoop-2.7.1-with-armhf-drivers.zip  
 exit  
-scp .bashrc hduser@raspberrypi5.local:~/.bashrc  
+scp ~/.bashrc hduser@raspberrypi5.local:~/.bashrc  
  
 ```
 
@@ -304,8 +305,15 @@ sudo nano slaves
 raspberrypi4
 raspberrypi5
 raspberrypi6
+cluster3raspberry3
 
 ```
+Create  file:/hdfs/tmp/dfs/data on every slave and give permission
+
+sudo mkdir -p /hdfs/tmp/dfs/data
+sudo chown hduser:hadoop /hdfs/tmp/
+chmod 750 /hdfs/tmp/
+
 
 
 Start the master and the slaves on the master:
