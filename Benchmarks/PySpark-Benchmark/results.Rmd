@@ -1,0 +1,25 @@
+---
+title: "PySpark-Benchmark"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+# import data
+library(readr)
+dd <- read_delim("data.csv", ";", escape_double = FALSE, col_types = cols(workers = col_number()), trim_ws = TRUE)
+dd$platform <- as.factor(dd$platform)
+dd$workers <- as.factor(dd$workers)
+dd$benchmark <- as.factor(dd$benchmark)
+dd$seconds <- as.numeric(dd$seconds)
+dd$benchmark = with(dd, reorder(benchmark, seconds, median))
+
+# plots
+library(ggplot2)
+library(scales)
+ggplot(dd, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point(stat='summary', fun.y=sum) + stat_summary(fun.y=sum, geom="line") + xlab("Workers") + ylab("Seconds")
+ggplot(dd, aes(x=benchmark, y=seconds, group=benchmark, color=platform)) + geom_point() + facet_grid(workers ~ ., scales='free') + xlab("Benchmark for each Platform and Worker") + ylab("Seconds") + scale_x_discrete(labels = wrap_format(15))
+```
