@@ -14,7 +14,10 @@ git clone https://github.com/DIYBigData/pyspark-benchmark.git
 
 # generate file to /gfs/file (71M)
 spark-submit --master spark://sparkmaster:7077 --name 'generate-benchmark-test-data' generate-data.py /gfs/file -r 1000000 -p 1
-	
+# or download a pre-generated file from dropbox
+wget -O file.zip https://www.dropbox.com/s/qjgdoj9p9tvdspa/file.zip?dl=1
+unzip file.zip
+
 # run shuffle benchmark
 spark-submit --master spark://sparkmaster:7077 benchmark-shuffle.py /gfs/file -r 1 -n 'shuffle-benchmark'
 
