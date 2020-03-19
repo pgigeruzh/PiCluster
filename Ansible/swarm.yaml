@@ -1,4 +1,34 @@
 ---
+
+- name: Purge Swarm And GlusterFS
+  hosts: all
+  become: true
+  tasks:
+    - name: "Remove Docker Containers"
+      shell: docker kill $(docker ps -a -q) && docker rm $(docker ps -a -q)
+      failed_when: false
+      no_log: True
+
+    - name: "Force Leave Swarm"
+      shell: docker swarm leave --force
+      failed_when: false
+      no_log: True
+
+    - name: "Force Purge Docker Volume Plugin"
+      shell: docker plugin rm gluster --force
+      failed_when: false
+      no_log: True
+
+    - name: Remove Gluster Server
+      apt: name=glusterfs-server state=absent purge=yes autoremove=yes
+      poll: 10
+      async: 40
+
+    - name: Delete Gluster Volumes
+      file:
+        path: /glusterfs/distributed
+        state: absent
+
 - name: Init Swarm Managers
   hosts: docker_swarm_manager
   tasks:
@@ -22,7 +52,9 @@
   become: true
   tasks:
     - name: "Install Gluster Server"
-      apt: name=glusterfs-server state=latest update_cache=yes
+      apt: name=glusterfs-server state=latest
+      poll: 10
+      async: 40
 
     - name: Enable Gluster Service
       service:
@@ -39,17 +71,16 @@
         path: /glusterfs/distributed
         state: directory
 
-    - name: Install Docker Plugin
+    - name: Install Docker Gluster Plugin
       shell: docker plugin install --alias gluster jmb12686/glusterfs-volume-plugin --grant-all-permissions --disable
-      ignore_errors: yes
+      poll: 10
+      async: 300
 
     - name: Setup Docker Plugin
       shell: docker plugin set gluster SERVERS="{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
-      ignore_errors: yes
 
     - name: Enable Docker Plugin
       shell: docker plugin enable gluster
-      ignore_errors: yes
 
     - name: Create Docker Volume
       docker_volume:
@@ -60,7 +91,7 @@
   hosts: docker_swarm_manager
   become: true
   tasks:
-    - name: Create Gluster Storage Pool
+    - name: Attach Peers
       gluster_peer:
         state: present
         nodes: "{{ groups['docker_swarm_workers'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
@@ -69,26 +100,11 @@
       gluster_volume:
         state: present
         name: gfs
-        replicas: 4
+        replicas: "{{ groups['all'] | length }}"
         force: true
         bricks: /glusterfs/distributed
         cluster: "{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
       run_once: true
-
-- name: Build Spark Image (armhf)
-  hosts: all
-  tasks:
-    - name: Git Clone
-      git:
-        repo: https://github.com/gettyimages/docker-spark.git
-        dest: /home/pi/docker-spark
-
-    - name: Build Spark
-      docker_image:
-        name: docker-spark
-        build:
-          path: /home/pi/docker-spark
-        source: build
 
 - name: Setup Docker
   hosts: docker_swarm_manager
