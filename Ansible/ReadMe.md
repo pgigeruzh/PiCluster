@@ -55,7 +55,7 @@ This folder contains the following Playbooks:
 - docker.yaml
   --> Installs docker + docker-compose  using the installation script (only RPi)
 - swarm.yaml
-  --> Initialized a Swarm based on the groups [docker_swarm_manager] and [docker_swarm_workers] in the inventory.ini
+  --> (Re-)installs and (re-)initializes Docker Swarm + GlusterFS based on the groups [docker_swarm_manager] and [docker_swarm_workers] in the inventory.ini
 
 Running the Playbooks is straight forward. For example, executing utilities.yaml (installs vim, nmap, git...) is as easy as:
 

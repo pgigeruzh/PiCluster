@@ -29,7 +29,7 @@ spark-submit --master spark://sparkmaster:7077 benchmark-cpu.py /gfs/file -s 800
 
 ## Movielens
 
-This is not a benchmark but a real-world dataset (https://grouplens.org/datasets/movielens/). An example can be found in "Spark/movielens.py" of this repo. The file is originally from: https://gist.github.com/jianyu0503/4753344051572c8fc7aa18123eafd2cc
+This is not a benchmark but a real-world dataset (https://grouplens.org/datasets/movielens/). An example project that uses the movielens dataset can be found in "Movielens/draft.py". The file is originally from: https://gist.github.com/jianyu0503/4753344051572c8fc7aa18123eafd2cc
 
 ```bash
 # download largest movielens dataset (190MB)
