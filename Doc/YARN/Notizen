@@ -1,0 +1,47 @@
+//SPARK JOB
+
+spark-submit --deploy-mode cluster                --class org.apache.spark.examples.SparkPi                $SPARK_HOME/examples/jars/spark-examples_2.11-2.4.5.jar 10
+
+//leave safemode:
+hdfs dfsadmin -safemode leave
+
+// if Namenode has no ressources:
+hdfs fsck -delete
+
+// list all files in hdfs
+hadoop fs -ls -R
+
+
+//FOR SPARK
+$HADOOP_CONF_DIR --> core-site.xml port must be set to 9000
+
+
+//benchmark 
+spark-submit --master yarn --deploy-mode cluster --name 'generate-benchmark-test-data' generate-data.py /opt/spark/examples/pyspark-benchmark/file -r 1000000 -p 1
+
+//run shuffle benchmark
+spark-submit --master yarn --deploy-mode cluster benchmark-shuffle.py /opt/spark/examples/pyspark-benchmark/file -r 1 -n 'shuffle-benchmark'
+
+//works
+spark-submit --master yarn --deploy-mode cluster --num-executors 14 --executor-cores 1 benchmark-shuffle.py /opt/spark/examples/pyspark-benchmark/file -r 1 -n 'shuffle-benchmark'
+
+//test
+spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-shuffle.py hdfs://192.168.1.187:9000/pyspark-benchmark/file
+
+640 spark executor, >512 driver memory
+
+
+//run CPU benchmark test
+spark-submit --master yarn --deploy-mode cluster --num-executors 8 --executor-cores 1 benchmark-cpu.py hdfs://192.168.1.187:9000/pyspark-benchmark/file -s 80000000 -p 4 -n 'cpu-benchmark'
+
+
+// works
+spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-cpu.py /opt/spark/examples/pyspark-benchmark/file -s 40000000 -p 4 -n 'cpu-benchmark'
+
+memory overhead --> 1024
+
+
+
+
+
+
