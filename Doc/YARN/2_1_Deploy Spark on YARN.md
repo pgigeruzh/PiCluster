@@ -29,21 +29,24 @@ mv $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defaults
 
 #in spark-defaults.conf, set yarn as spark-master and limit some ressources
 
-# Example:
 spark.master                     yarn
 spark.eventLog.enabled           true
-spark.eventLog.dir               hdfs://raspberrypi4:9000/spark-logs
+spark.eventLog.dir               hdfs://cluster3raspberry0:9000/spark-logs
 #spark.eventLog.dir              hdfs://raspberrypi4:8021/directory
 
 # spark.serializer                 org.apache.spark.serializer.KryoSerializer
-spark.driver.memory              512m
-# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="o$
-# spark.yarn.am.memory           512m
-spark.executor.memory            512m
-spark.history.provider           org.apache.spark.deploy.history.FsHistoryProvi$
-spark.history.fs.logDirectory    hdfs://raspberrypi4:9000/spark-logs
+#spark.driver.memory              512m
+# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
+#spark.yarn.am.memory		 465m
+spark.executor.memory            640m
+spark.history.provider           org.apache.spark.deploy.history.FsHistoryProvider
+spark.history.fs.logDirectory    hdfs://cluster3raspberry0:9000/spark-logs
 spark.history.fs.update.interval 10s
-spark.history.ui.port            9000
+spark.history.ui.port            18080
+
+spark.driver.memoryOverhead	 1024
+# spark.executor.memoryOverhead	 512
+
 
 ```
 If there's a SPARK request, which needs more memory than allowed, YARN wil reject creation of a container
