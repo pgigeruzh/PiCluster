@@ -54,25 +54,27 @@ Thus I have set some ressource limitations (above). Must be also done for YARN.
 ```bash
 # check the settings in the yarn-site.xml file 
 
+<configuration>
  <property>
     <name>yarn.nodemanager.aux-services</name>
     <value>mapreduce_shuffle</value>
   </property>
+
   <property>
     <name>yarn.nodemanager.resource.cpu-vcores</name>
     <value>4</value>
   </property>
   <property>
     <name>yarn.nodemanager.resource.memory-mb</name>
-    <value>3072</value>
+    <value>4096</value>
   </property>
   <property>
     <name>yarn.scheduler.minimum-allocation-mb</name>
-    <value>64</value>
+    <value>128</value>
   </property>
   <property>
     <name>yarn.scheduler.maximum-allocation-mb</name>
-    <value>3072</value>
+    <value>2048</value>
   </property>
   <property>
     <name>yarn.scheduler.minimum-allocation-vcores</name>
@@ -81,7 +83,10 @@ Thus I have set some ressource limitations (above). Must be also done for YARN.
   <property>
     <name>yarn.scheduler.maximum-allocation-vcores</name>
     <value>4</value>
-  </property>
+  </property> 
+  
+</configuration>
+
 
 ```
 
