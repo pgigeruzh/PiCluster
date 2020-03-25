@@ -22,7 +22,7 @@ unzip file.zip
 spark-submit --master spark://sparkmaster:7077 benchmark-shuffle.py /gfs/file -r 1 -n 'shuffle-benchmark'
 
 # run CPU benchmark
-spark-submit --master spark://sparkmaster:7077 benchmark-cpu.py /gfs/file -s 80000000 -p 4 -n 'cpu-benchmark'
+spark-submit --master spark://sparkmaster:7077 benchmark-cpu.py /gfs/file -s 40000000 -p 4 -n 'cpu-benchmark'
 ```
 
 

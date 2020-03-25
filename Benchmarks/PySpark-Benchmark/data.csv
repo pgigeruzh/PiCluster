@@ -3,83 +3,83 @@ swarm;1;4;Group By;33.22094278
 swarm;1;4;Repartition;34.70043007
 swarm;1;4;Inner join;14.27666647
 swarm;1;4;Broadcast inner join;12.25531064
-swarm;1;4;SHA-512;20.67618622
-swarm;1;4;Calculate Pi;72.3622304
-swarm;1;4;Calculate Pi dataframe;10.55392963
+swarm;1;4;SHA-512;22.86405379
+swarm;1;4;Calculate Pi;18.59163657
+swarm;1;4;Calculate Pi dataframe;6.823546152
 swarm;2;4;Group By;31.85436964
 swarm;2;4;Repartition;33.54891717
 swarm;2;4;Inner join;14.66943655
 swarm;2;4;Broadcast inner join;12.29327685
-swarm;2;4;SHA-512;20.46499012
-swarm;2;4;Calculate Pi;71.16431455
-swarm;2;4;Calculate Pi dataframe;10.41326769
+swarm;2;4;SHA-512;21.34933122
+swarm;2;4;Calculate Pi;17.96681448
+swarm;2;4;Calculate Pi dataframe;6.522872377
 swarm;3;4;Group By;31.32190338
 swarm;3;4;Repartition;41.23779826
 swarm;3;4;Inner join;13.73875927
 swarm;3;4;Broadcast inner join;11.70360674
-swarm;3;4;SHA-512;20.25168984
-swarm;3;4;Calculate Pi;71.77322966
-swarm;3;4;Calculate Pi dataframe;10.47469512
+swarm;3;4;SHA-512;21.19174167
+swarm;3;4;Calculate Pi;17.82548724
+swarm;3;4;Calculate Pi dataframe;6.452824561
 swarm;1;3;Group By;35.48462137
 swarm;1;3;Repartition;35.81008787
 swarm;1;3;Inner join;16.67530743
 swarm;1;3;Broadcast inner join;17.19546996
-swarm;1;3;SHA-512;23.54468437
-swarm;1;3;Calculate Pi;71.44372804
-swarm;1;3;Calculate Pi dataframe;11.1438316
+swarm;1;3;SHA-512;24.15808753
+swarm;1;3;Calculate Pi;18.0369225
+swarm;1;3;Calculate Pi dataframe;6.253139139
 swarm;2;3;Group By;35.18943753
 swarm;2;3;Repartition;39.12051286
 swarm;2;3;Inner join;17.29020014
 swarm;2;3;Broadcast inner join;14.60788017
-swarm;2;3;SHA-512;22.85656661
-swarm;2;3;Calculate Pi;72.77364456
-swarm;2;3;Calculate Pi dataframe;10.48763701
+swarm;2;3;SHA-512;24.04624229
+swarm;2;3;Calculate Pi;18.16083985
+swarm;2;3;Calculate Pi dataframe;6.214196542
 swarm;3;3;Group By;35.23050788
 swarm;3;3;Repartition;35.17013033
 swarm;3;3;Inner join;16.4317348
 swarm;3;3;Broadcast inner join;14.87957055
-swarm;3;3;SHA-512;23.41890562
-swarm;3;3;Calculate Pi;70.969901
-swarm;3;3;Calculate Pi dataframe;10.39457279
+swarm;3;3;SHA-512;24.06618168
+swarm;3;3;Calculate Pi;17.38206889
+swarm;3;3;Calculate Pi dataframe;6.250682431
 swarm;1;2;Group By;42.08586974
 swarm;1;2;Repartition;46.60209179
 swarm;1;2;Inner join;23.54248588
 swarm;1;2;Broadcast inner join;19.97592672
-swarm;1;2;SHA-512;29.06565526
-swarm;1;2;Calculate Pi;73.18177132
-swarm;1;2;Calculate Pi dataframe;10.47858017
+swarm;1;2;SHA-512;30.98783779
+swarm;1;2;Calculate Pi;17.59965916
+swarm;1;2;Calculate Pi dataframe;6.404953258
 swarm;2;2;Group By;42.65122809
 swarm;2;2;Repartition;37.33524091
 swarm;2;2;Inner join;24.91375662
 swarm;2;2;Broadcast inner join;20.59629204
-swarm;2;2;SHA-512;28.82788583
-swarm;2;2;Calculate Pi;74.17292664
-swarm;2;2;Calculate Pi dataframe;10.55524976
+swarm;2;2;SHA-512;30.25725404
+swarm;2;2;Calculate Pi;17.72595559
+swarm;2;2;Calculate Pi dataframe;6.514182157
 swarm;3;2;Group By;42.35032563
 swarm;3;2;Repartition;37.38835232
 swarm;3;2;Inner join;22.38042506
 swarm;3;2;Broadcast inner join;19.02616729
-swarm;3;2;SHA-512;28.78864358
-swarm;3;2;Calculate Pi;74.17610176
-swarm;3;2;Calculate Pi dataframe;10.81051238
+swarm;3;2;SHA-512;29.82801009
+swarm;3;2;Calculate Pi;17.98298276
+swarm;3;2;Calculate Pi dataframe;6.475829993
 swarm;1;1;Group By;59.23227016
 swarm;1;1;Repartition;56.67177304
 swarm;1;1;Inner join;41.73821844
 swarm;1;1;Broadcast inner join;33.04144835
-swarm;1;1;SHA-512;47.061937
-swarm;1;1;Calculate Pi;73.33692042
-swarm;1;1;Calculate Pi dataframe;10.29623508
+swarm;1;1;SHA-512;49.78863429
+swarm;1;1;Calculate Pi;18.26884608
+swarm;1;1;Calculate Pi dataframe;6.352893532
 swarm;2;1;Group By;56.22366963
 swarm;2;1;Repartition;43.19142471
 swarm;2;1;Inner join;38.20268722
 swarm;2;1;Broadcast inner join;34.79687896
-swarm;2;1;SHA-512;47.3728287
-swarm;2;1;Calculate Pi;72.43476232
-swarm;2;1;Calculate Pi dataframe;10.32551341
+swarm;2;1;SHA-512;47.32089528
+swarm;2;1;Calculate Pi;18.26369686
+swarm;2;1;Calculate Pi dataframe;6.509055126
 swarm;3;1;Group By;55.91520716
 swarm;3;1;Repartition;42.21438399
 swarm;3;1;Inner join;41.36208659
 swarm;3;1;Broadcast inner join;35.96019437
-swarm;3;1;SHA-512;46.80115604
-swarm;3;1;Calculate Pi;73.23024853
-swarm;3;1;Calculate Pi dataframe;10.27783762
+swarm;3;1;SHA-512;46.66641043
+swarm;3;1;Calculate Pi;18.32597922
+swarm;3;1;Calculate Pi dataframe;6.282470586
