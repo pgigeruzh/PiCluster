@@ -60,6 +60,8 @@ Output Yarn
 +------+-------+
 | Drama|1467402|
 +------+-------+
+
+Duration: 4min 32 sec
 ```
 
 ## Spark-Bench
