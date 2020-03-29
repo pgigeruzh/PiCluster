@@ -83,69 +83,69 @@ swarm;3;1;Broadcast inner join;35.96019437
 swarm;3;1;SHA-512;46.66641043
 swarm;3;1;Calculate Pi;18.32597922
 swarm;3;1;Calculate Pi dataframe;6.282470586
-yarn;1;4;Group By;53.15934181
-yarn;1;4;Repartition;21.69134808
-yarn;1;4;Inner join;44.32392502
-yarn;1;4;Broadcast inner join;27.88603401
-yarn;1;4;SHA-512;54.21348906
-yarn;1;4;Calculate Pi;38.47635198
-yarn;1;4;Calculate Pi dataframe;10.69601798
-yarn;2;4;Group By;51.95233321
-yarn;2;4;Repartition;20.79765201
-yarn;2;4;Inner join;42.83860493
-yarn;2;4;Broadcast inner join;28.97785711
-yarn;2;4;SHA-512;53.73387504
-yarn;2;4;Calculate Pi;46.140733
-yarn;2;4;Calculate Pi dataframe;8.932518005
-yarn;3;4;Group By;53.31727695
-yarn;3;4;Repartition;21.80556798
-yarn;3;4;Inner join;45.02553606
-yarn;3;4;Broadcast inner join;27.88718414
-yarn;3;4;SHA-512;44.01148009
-yarn;3;4;Calculate Pi;45.20866704
-yarn;3;4;Calculate Pi dataframe;9.20207715
+yarn;1;4;Group By;51.69823289
+yarn;1;4;Repartition;19.573174
+yarn;1;4;Inner join;38.57736802
+yarn;1;4;Broadcast inner join;25.4583919
+yarn;1;4;SHA-512;32.00302315
+yarn;1;4;Calculate Pi;38.0193572
+yarn;1;4;Calculate Pi dataframe;9.945282936
+yarn;2;4;Group By;51.49254084
+yarn;2;4;Repartition;20.06458402
+yarn;2;4;Inner join;40.19927216
+yarn;2;4;Broadcast inner join;25.00146103
+yarn;2;4;SHA-512;41.0660522
+yarn;2;4;Calculate Pi;46.65095997
+yarn;2;4;Calculate Pi dataframe;9.482554913
+yarn;3;4;Group By;52.21003103
+yarn;3;4;Repartition;21.39007306
+yarn;3;4;Inner join;42.92763996
+yarn;3;4;Broadcast inner join;26.11065578
+yarn;3;4;SHA-512;37.49934316
+yarn;3;4;Calculate Pi;43.97184014
+yarn;3;4;Calculate Pi dataframe;10.84619498
 yarn;1;3;Group By;63.4720161
-yarn;1;3;Repartition;24.48166895
-yarn;1;3;Inner join;40.99429202
-yarn;1;3;Broadcast inner join;25.5139761
-yarn;1;3;SHA-512;63.55813599
-yarn;1;3;Calculate Pi;58.57730889
-yarn;1;3;Calculate Pi dataframe;11.26344895
-yarn;2;3;Group By;52.35362196
-yarn;2;3;Repartition;21.77402806
-yarn;2;3;Inner join;49.53424597
-yarn;2;3;Broadcast inner join;31.52467799
-yarn;2;3;SHA-512;47.89470816
-yarn;2;3;Calculate Pi;68.26257801
-yarn;2;3;Calculate Pi dataframe;11.18091393
+yarn;1;3;Repartition;23.92139387
+yarn;1;3;Inner join;28.38678885
+yarn;1;3;Broadcast inner join;25.9069891
+yarn;1;3;SHA-512;42.53744483
+yarn;1;3;Calculate Pi;41.78201008
+yarn;1;3;Calculate Pi dataframe;9.109242916
+yarn;2;3;Group By;61.0062592
+yarn;2;3;Repartition;25.824404
+yarn;2;3;Inner join;31.1592741
+yarn;2;3;Broadcast inner join;24.27764511
+yarn;2;3;SHA-512;47.65465845
+yarn;2;3;Calculate Pi;58.54854165
+yarn;2;3;Calculate Pi dataframe;11.19344585
 yarn;3;3;Group By;61.92914987
 yarn;3;3;Repartition;23.022017
-yarn;3;3;Inner join;55.87379003
+yarn;3;3;Inner join;35.46379003
 yarn;3;3;Broadcast inner join;25.64694309
-yarn;3;3;SHA-512;65.21185708
-yarn;3;3;Calculate Pi;39.94513988
-yarn;3;3;Calculate Pi dataframe;10.395509
-yarn;1;2;Group By;81.52732801
-yarn;1;2;Repartition;27.66488099
-yarn;1;2;Inner join;51.09815192
-yarn;1;2;Broadcast inner join;28.74710894
-yarn;1;2;SHA-512;61.96512198
-yarn;1;2;Calculate Pi;49.8527081
-yarn;1;2;Calculate Pi dataframe;8.866984129
-yarn;2;2;Group By;80.77614617
-yarn;2;2;Repartition;28.06629395
-yarn;2;2;Inner join;49.75438809
-yarn;2;2;Broadcast inner join;31.01301289
-yarn;2;2;SHA-512;64.05477405
-yarn;2;2;Calculate Pi;44.70897913
-yarn;2;2;Calculate Pi dataframe;8.910584927
+yarn;3;3;SHA-512;53.96768212
+yarn;3;3;Calculate Pi;43.30682516
+yarn;3;3;Calculate Pi dataframe;8.962949991
+yarn;1;2;Group By;81.21093392
+yarn;1;2;Repartition;29.92736912
+yarn;1;2;Inner join;36.01768613
+yarn;1;2;Broadcast inner join;37.09385514
+yarn;1;2;SHA-512;61.41704822
+yarn;1;2;Calculate Pi;50.23972392
+yarn;1;2;Calculate Pi dataframe;9.021786213
+yarn;2;2;Group By;79.12937903
+yarn;2;2;Repartition;31.04526615
+yarn;2;2;Inner join;37.40349698
+yarn;2;2;Broadcast inner join;31.95748806
+yarn;2;2;SHA-512;59.07834651
+yarn;2;2;Calculate Pi;46.56484563
+yarn;2;2;Calculate Pi dataframe;8.545485783
 yarn;3;2;Group By;83.22605491
 yarn;3;2;Repartition;31.05960584
-yarn;3;2;Inner join;56.99829102
+yarn;3;2;Inner join;38.99829102
 yarn;3;2;Broadcast inner join;30.589499
-yarn;3;2;SHA-512;65.1340301
-yarn;3;2;Calculate Pi;44.97738004
-yarn;3;2;Calculate Pi dataframe;10.47614193
+yarn;3;2;SHA-512;61.98274803
+yarn;3;2;Calculate Pi;46.69093704
+yarn;3;2;Calculate Pi dataframe;8.030012846
 yarn;1;1;Group By;84.05071402
 yarn;1;1;Repartition;53.98859
 yarn;1;1;Inner join;67.93439794
