@@ -24,8 +24,22 @@ spark-submit --master spark://sparkmaster:7077 benchmark-shuffle.py /gfs/file -r
 # run CPU benchmark
 spark-submit --master spark://sparkmaster:7077 benchmark-cpu.py /gfs/file -s 40000000 -p 4 -n 'cpu-benchmark'
 ```
+For Yarn-Cluster
 
+```bash
+#download a pre-generated file from dropbox
+wget -O file.zip https://www.dropbox.com/s/qjgdoj9p9tvdspa/file.zip?dl=1
+unzip file.zip
 
+#copy to hdfs
+hdfs dfs -copyFromLocal /opt/spark/examples/pyspark-benchmark /pyspark-benchmark
+
+# run shuffle benchmark
+spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-shuffle.py hdfs://192.168.1.187:9000/pyspark-benchmark/file
+
+# run CPU benchmark
+spark-submit --master yarn --deploy-mode cluster --num-executors 14 --executor-cores 1 benchmark-cpu.py hdfs://192.168.1.187:9000/pyspark-benchmark/file -s 40000000 -p 4 -n 'cpu-benchmark'
+```
 
 ## Movielens
 
