@@ -41,6 +41,12 @@ unzip ml-20m.zip
 spark-submit --master spark://sparkmaster:7077 --packages com.databricks:spark-csv_2.11:1.5.0 movielens.py
 ```
 
+For Yarn-Cluster
+```bash
+hdfs dfs -copyFromLocal /opt/spark/examples/ml-20m /ml-20m
+hdfs dfsadmin -safemode leave
+spark-submit --master yarn --deploy-mode cluster --packages com.databricks:spark-csv_2.11:1.5.0 movielens.py hdfs://192.168.1.187:9000/ml-20m
+```
 
 
 ## Spark-Bench
