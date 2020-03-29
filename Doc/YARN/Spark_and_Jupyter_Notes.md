@@ -1,4 +1,5 @@
-SPARK JOB
+# SPARK JOB
+
 spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.11-2.4.5.jar 10
 
 #leave safemode:
@@ -14,7 +15,7 @@ hadoop fs -ls -R
 #INFO FOR SPARK
 $HADOOP_CONF_DIR --> core-site.xml port must be set to 9000
 
-#benchmark test
+# benchmark test
 
 #generate data
 spark-submit --master yarn --deploy-mode cluster --name 'generate-benchmark-test-data' generate-data.py /opt/spark/examples/pyspark-benchmark/file -r 1000000 -p 1
@@ -43,7 +44,7 @@ spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-cp
 Exception in thread "dispatcher-event-loop-3" java.lang.OutOfMemoryError: Java heap space
 
 
-#jupyter login 
+# Jupyter login 
 ssh -L 8888:localhost:8888 hduser@192.168.1.187
 click on localhost
 
