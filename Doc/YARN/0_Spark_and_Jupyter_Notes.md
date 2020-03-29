@@ -1,16 +1,24 @@
 # SPARK JOB
 
+```bash
 spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.11-2.4.5.jar 10
+```
+
 
 #leave safemode:
+```bash
 hdfs dfsadmin -safemode leave
+```
 
 #if Namenode has no ressources:
+```bash
 hdfs fsck -delete
+```
 
 #list all files in hdfs
+```bash
 hadoop fs -ls -R
-
+```
 
 #INFO FOR SPARK
 $HADOOP_CONF_DIR --> core-site.xml port must be set to 9000
@@ -18,24 +26,38 @@ $HADOOP_CONF_DIR --> core-site.xml port must be set to 9000
 # benchmark test
 
 #generate data
+```bash
 spark-submit --master yarn --deploy-mode cluster --name 'generate-benchmark-test-data' generate-data.py /opt/spark/examples/pyspark-benchmark/file -r 1000000 -p 1
+```
+
 
 #shuffle benchmark on locally stored file
+```bash
 spark-submit --master yarn --deploy-mode cluster benchmark-shuffle.py /opt/spark/examples/pyspark-benchmark/file -r 1 -n 'shuffle-benchmark'
+```
 
 #shuffle benchmark on locally stored file
+```bash
 spark-submit --master yarn --deploy-mode cluster --num-executors 14 --executor-cores 1 benchmark-shuffle.py /opt/spark/examples/pyspark-benchmark/file -r 1 -n 'shuffle-benchmark'
+```
 
 #shuffle benchmark on HDFS
+```bash
 spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-shuffle.py hdfs://192.168.1.187:9000/pyspark-benchmark/file
-
-
+```
 
 #CPU benchmark test on HDFS
+
+```bash
 spark-submit --master yarn --deploy-mode cluster --num-executors 14 --executor-cores 1 benchmark-cpu.py hdfs://192.168.1.187:9000/pyspark-benchmark/file -s 40000000 -p 4 -n 'cpu-benchmark'
+```
+
 
 #CPU benchmark test on locally stored file
+```bash
 spark-submit --master yarn --deploy-mode cluster --num-executors 14 benchmark-cpu.py /opt/spark/examples/pyspark-benchmark/file -s 40000000 -p 4 -n 'cpu-benchmark'
+```
+
 
 #INFO error message 80 Mio. Samples
 20/03/23 17:27:36 WARN scheduler.TaskSetManager: Stage 1 contains a task of very large size (97915 KB). The maximum recommended task size is 100 KB.
@@ -45,12 +67,12 @@ Exception in thread "dispatcher-event-loop-3" java.lang.OutOfMemoryError: Java h
 
 
 # Jupyter login 
+```bash
 ssh -L 8888:localhost:8888 hduser@192.168.1.187
 click on localhost
+```
 
 
+```bash
 
-
-
-
-
+```
