@@ -1,4 +1,4 @@
-#SPARK JOB
+SPARK JOB
 spark-submit --deploy-mode cluster --class org.apache.spark.examples.SparkPi $SPARK_HOME/examples/jars/spark-examples_2.11-2.4.5.jar 10
 
 #leave safemode:
@@ -11,7 +11,7 @@ hdfs fsck -delete
 hadoop fs -ls -R
 
 
-# INFO FOR SPARK
+#INFO FOR SPARK
 $HADOOP_CONF_DIR --> core-site.xml port must be set to 9000
 
 #benchmark test
