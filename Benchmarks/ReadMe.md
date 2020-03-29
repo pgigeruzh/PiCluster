@@ -48,7 +48,7 @@ hdfs dfsadmin -safemode leave
 spark-submit --master yarn --deploy-mode cluster --num-executors 14 --packages com.databricks:spark-csv_2.11:1.5.0 movielens.py hdfs://192.168.1.187:9000/ml-20m
 ```
 Output Yarn
-
+```bash
 +------+----+
 |   tag| cnt|
 +------+----+
@@ -60,6 +60,7 @@ Output Yarn
 +------+-------+
 | Drama|1467402|
 +------+-------+
+```
 
 ## Spark-Bench
 
