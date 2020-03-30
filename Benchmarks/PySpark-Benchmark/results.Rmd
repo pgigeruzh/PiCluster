@@ -19,11 +19,15 @@ dd$benchmark <- as.factor(dd$benchmark)
 dd$seconds <- as.numeric(dd$seconds)
 dd$benchmark = with(dd, reorder(benchmark, seconds, median))
 
-# plots
 library(ggplot2)
 library(scales)
-ggplot(dd, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point(stat='summary', fun.y=sum) + stat_summary(fun.y=sum, geom="line") + xlab("Workers") + ylab("Seconds")
-ggplot(dd, aes(x=benchmark, y=seconds, group=benchmark, color=platform)) + geom_point() + facet_grid(workers ~ ., scales='free') + xlab("Benchmark for each Platform and Worker") + ylab("Seconds") + scale_x_discrete(labels = wrap_format(15))
 
-dd[, list(seconds=mean(seconds)), by=list(benchmark, workers, platform)]
+# plot 1
+dd1 <- dd[, list(seconds=mean(seconds)), by=list(workers, platform)]
+ggplot(dd1, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + xlab("Workers") + ylab("Average Benchmark Duration (Seconds)")
+# plot 2
+dd2 <- dd[, list(seconds=mean(seconds)), by=list(benchmark, workers, platform)]
+ggplot(dd2, aes(x=benchmark, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + facet_grid(workers ~ ., scales='fixed') + xlab("Benchmark for each Platform and Worker") + ylab("Average Benchmark Duration (Seconds)") + scale_x_discrete(labels = wrap_format(15))
+
+dd2
 ```
