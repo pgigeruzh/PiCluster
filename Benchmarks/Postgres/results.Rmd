@@ -1,0 +1,24 @@
+---
+title: "Postgres Benchmark"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+# import data
+library(readr)
+dd <- read_delim("postgres_gluster_vs_local.txt", ";", col_types = cols(device=col_character(), progress_seconds = col_double(), transactions_per_second = col_double(), latency_ms = col_double()), escape_double = FALSE, trim_ws = TRUE)
+library(data.table)
+dd <- as.data.table(dd)
+
+library(ggplot2)
+library(scales)
+
+# plot 1
+ggplot(dd[device=="gluster" | device=="local"], aes(x=device, y=transactions_per_second, group=device)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second")
+# plot 2
+ggplot(dd[device=="gluster_read_only" | device=="local_read_only"], aes(x=device, y=transactions_per_second, group=device)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Transactions Per Second")
+```
