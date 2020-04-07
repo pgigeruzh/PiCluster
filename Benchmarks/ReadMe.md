@@ -81,24 +81,23 @@ Duration: 4min 32 sec
 ## Postgres
 
 ```bash
-# Dockerfile for Postgres with replication: https://github.com/sameersbn/docker-postgresql
-docker build -t pgigeruzh/postgresql github.com/sameersbn/docker-postgresql
-
-# Run Master
-docker service create --name postgresmaster --network spark --publish 5432:5432 --env DB_USER=dbuser --env DB_PASS=dbuserpass --env DB_NAME=dbname --env REPLICATION_USER=repluser --env REPLICATION_PASS=repluserpass pgigeruzh/postgresql
-# Run Slave
-docker service create --name postgresslave1 --network spark --env REPLICATION_MODE=slave --env REPLICATION_SSLMODE=prefer --env REPLICATION_HOST=postgresmaster --env REPLICATION_PORT=5432 --env REPLICATION_USER=repluser --env REPLICATION_PASS=repluserpass pgigeruzh/postgresql
-# For Gluster Benchmark --> Mount GlusterFS
-docker run --name postgresql-master --mount source=gfs,destination=/var/lib/postgresql -itd pgigeruzh/postgresql
-docker exec -it postgresql-master bash
+# Start pgbench inside a docker container
+# (for GlusterFS, --mount source=gfs,destination=/var/lib/postgresql)
+docker run --name pgbench -d --rm --network spark pgigeruzh/postgres
+docker exec -it pgbench bash
 sudo su - postgres
 
-# Benchmark
+# Create an emty database on the test subject e.g. postgresmaster
+# (the command below only works if Postgres runs on localhost)
 createdb bench_test
-# init benchmark with 1000000 rows
-pgbench -i -s 10 bench_test
-# -c: 8 clients, -j: 4 threads, -P: 30 minutes, -S: read-only
-pgbench -c 8 -j 4 -T 1800 -P 30 -S bench_test
+
+# Initialize database with 1000000 rows
+# (-h: hostname)
+pgbench -h postgresmaster -i -s 10 bench_test
+
+# Run benchmark
+# (-c: 8 clients, -j: 4 threads, -P: 30 minutes, -S: read-only)
+pgbench -h postgresmaster -c 8 -j 4 -T 1800 -P 30 -S bench_test
 ```
 
 ## 
