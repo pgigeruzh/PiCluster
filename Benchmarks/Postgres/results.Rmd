@@ -10,7 +10,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE}
 # import data
 library(readr)
-dd <- read_delim("postgres_gluster_vs_local.txt", ";", col_types = cols(device=col_character(), progress_seconds = col_double(), transactions_per_second = col_double(), latency_ms = col_double()), escape_double = FALSE, trim_ws = TRUE)
+dd <- read_delim("pgbench -c 8 -j 4 -T 1800 -P 30.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+dd$benchmark_description <- factor(dd$benchmark_description, levels=c("Gluster (Single DB)", "Docker (Single DB)", "Swarm (Single DB)", "Swarm (Multi DB)", "Pgpool II (Multi DB)"))
+dd$read_only <- as.logical(dd$read_only)
 library(data.table)
 dd <- as.data.table(dd)
 
@@ -18,7 +20,7 @@ library(ggplot2)
 library(scales)
 
 # plot 1
-ggplot(dd[device=="gluster" | device=="local"], aes(x=device, y=transactions_per_second, group=device)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second")
+ggplot(dd[read_only==FALSE], aes(x=benchmark_description, y=transactions_per_second, group=benchmark_description)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second")
 # plot 2
-ggplot(dd[device=="gluster_read_only" | device=="local_read_only"], aes(x=device, y=transactions_per_second, group=device)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Transactions Per Second")
+ggplot(dd[read_only==TRUE], aes(x=benchmark_description, y=transactions_per_second, group=benchmark_description)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Transactions Per Second")
 ```
