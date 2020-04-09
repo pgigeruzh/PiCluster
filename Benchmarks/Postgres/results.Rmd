@@ -10,17 +10,28 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE}
 # import data
 library(readr)
-dd <- read_delim("pgbench -c 8 -j 4 -T 1800 -P 30.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+dd <- read_delim("data.csv", ";", escape_double = FALSE, trim_ws = TRUE)
 dd$benchmark_description <- factor(dd$benchmark_description, levels=c("Gluster (Single DB)", "Docker (Single DB)", "Swarm (Single DB)", "Swarm (Multi DB)", "Pgpool II (Multi DB)"))
 dd$read_only <- as.logical(dd$read_only)
+dd$clients <- as.factor(dd$clients)
 library(data.table)
 dd <- as.data.table(dd)
 
 library(ggplot2)
+library(gridExtra)
 library(scales)
 
 # plot 1
-ggplot(dd[read_only==FALSE], aes(x=benchmark_description, y=transactions_per_second, group=benchmark_description)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second")
+p1 <- ggplot(dd[read_only==FALSE], aes(x=benchmark_description, y=transactions_per_second, colour=clients)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second") + scale_x_discrete(labels = wrap_format(12))
 # plot 2
-ggplot(dd[read_only==TRUE], aes(x=benchmark_description, y=transactions_per_second, group=benchmark_description)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Transactions Per Second")
+p2 <- ggplot(dd[read_only==TRUE], aes(x=benchmark_description, y=transactions_per_second, colour=clients)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Transactions Per Second") + scale_x_discrete(labels = wrap_format(12))
+# plot 3
+p3 <- ggplot(dd[read_only==FALSE], aes(x=benchmark_description, y=latency_ms, colour=clients)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Latency (ms)") + scale_x_discrete(labels = wrap_format(12))
+# plot 4
+p4 <- ggplot(dd[read_only==TRUE], aes(x=benchmark_description, y=latency_ms, colour=clients)) + geom_boxplot() + xlab("Postgres Read-Only Benchmark") + ylab("Latency (ms)") + scale_x_discrete(labels = wrap_format(12))
+
+# plot p1 and p2
+grid.arrange(p1, p2)
+# plot p3 and p4
+grid.arrange(p3, p4)
 ```

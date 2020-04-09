@@ -96,8 +96,10 @@ createdb bench_test
 pgbench -h postgresmaster -i -s 10 bench_test
 
 # Run benchmark
-# (-c: 8 clients, -j: 4 threads, -P: 30 minutes, -S: read-only)
+# (-c: 8 clients, -j: 4 threads, -T: 1800 seconds, -P: print every 30s, -S: read-only)
 pgbench -h postgresmaster -c 8 -j 4 -T 1800 -P 30 -S bench_test
+# (-c: 80 clients, -j: 4 threads, -T: 1800 seconds, -P: print every 30s, -S: read-only)
+pgbench -h postgresmaster -c 80 -j 4 -T 1800 -P 30 -S bench_test
 ```
 
 ## 
