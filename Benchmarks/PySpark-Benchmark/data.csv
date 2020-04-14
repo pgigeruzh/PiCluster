@@ -171,83 +171,83 @@ kubernetes;1;4;Group By;32.25768743
 kubernetes;1;4;Repartition;37.10055951
 kubernetes;1;4;Inner join;14.97526615
 kubernetes;1;4;Broadcast inner join;12.21068288
-kubernetes;1;4;SHA-512;0
-kubernetes;1;4;Calculate Pi;0
-kubernetes;1;4;Calculate Pi dataframe;0
+kubernetes;1;4;SHA-512;19.52474905
+kubernetes;1;4;Calculate Pi;17.81339214
+kubernetes;1;4;Calculate Pi dataframe;6.495108058
 kubernetes;2;4;Group By;31.69961357
 kubernetes;2;4;Repartition;49.05314236
 kubernetes;2;4;Inner join;14.69445118
 kubernetes;2;4;Broadcast inner join;13.12071436
-kubernetes;2;4;SHA-512;0
-kubernetes;2;4;Calculate Pi;0
-kubernetes;2;4;Calculate Pi dataframe;0
+kubernetes;2;4;SHA-512;19.3504571
+kubernetes;2;4;Calculate Pi;17.85804488
+kubernetes;2;4;Calculate Pi dataframe;6.339017857
 kubernetes;3;4;Group By;30.81860909
 kubernetes;3;4;Repartition;33.59193913
 kubernetes;3;4;Inner join;14.12251092
 kubernetes;3;4;Broadcast inner join;12.55692522
-kubernetes;3;4;SHA-512;0
-kubernetes;3;4;Calculate Pi;0
-kubernetes;3;4;Calculate Pi dataframe;0
+kubernetes;3;4;SHA-512;19.2967763
+kubernetes;3;4;Calculate Pi;17.44648065
+kubernetes;3;4;Calculate Pi dataframe;6.380114169
 kubernetes;1;3;Group By;33.93193136
 kubernetes;1;3;Repartition;35.77120649
 kubernetes;1;3;Inner join;17.77823886
 kubernetes;1;3;Broadcast inner join;16.83581394
-kubernetes;1;3;SHA-512;0
-kubernetes;1;3;Calculate Pi;0
-kubernetes;1;3;Calculate Pi dataframe;0
+kubernetes;1;3;SHA-512;22.71468255
+kubernetes;1;3;Calculate Pi;18.47076532
+kubernetes;1;3;Calculate Pi dataframe;6.409804362
 kubernetes;2;3;Group By;33.82147194
 kubernetes;2;3;Repartition;33.07795829
 kubernetes;2;3;Inner join;16.5904803
 kubernetes;2;3;Broadcast inner join;14.32089295
-kubernetes;2;3;SHA-512;0
-kubernetes;2;3;Calculate Pi;0
-kubernetes;2;3;Calculate Pi dataframe;0
+kubernetes;2;3;SHA-512;23.02032708
+kubernetes;2;3;Calculate Pi;18.88136262
+kubernetes;2;3;Calculate Pi dataframe;6.558216711
 kubernetes;3;3;Group By;34.10066687
 kubernetes;3;3;Repartition;36.01734824
 kubernetes;3;3;Inner join;16.65793228
 kubernetes;3;3;Broadcast inner join;14.34562833
-kubernetes;3;3;SHA-512;0
-kubernetes;3;3;Calculate Pi;0
-kubernetes;3;3;Calculate Pi dataframe;0
+kubernetes;3;3;SHA-512;22.41090572
+kubernetes;3;3;Calculate Pi;18.11612631
+kubernetes;3;3;Calculate Pi dataframe;6.527546834
 kubernetes;1;2;Group By;40.79738178
 kubernetes;1;2;Repartition;38.81898765
 kubernetes;1;2;Inner join;22.32003467
 kubernetes;1;2;Broadcast inner join;19.77398772
-kubernetes;1;2;SHA-512;0
-kubernetes;1;2;Calculate Pi;0
-kubernetes;1;2;Calculate Pi dataframe;0
+kubernetes;1;2;SHA-512;28.97574452
+kubernetes;1;2;Calculate Pi;18.62370429
+kubernetes;1;2;Calculate Pi dataframe;6.437372895
 kubernetes;2;2;Group By;40.05041531
 kubernetes;2;2;Repartition;39.99084885
 kubernetes;2;2;Inner join;22.90487083
 kubernetes;2;2;Broadcast inner join;19.51308645
-kubernetes;2;2;SHA-512;0
-kubernetes;2;2;Calculate Pi;0
-kubernetes;2;2;Calculate Pi dataframe;0
+kubernetes;2;2;SHA-512;28.89932855
+kubernetes;2;2;Calculate Pi;18.49162334
+kubernetes;2;2;Calculate Pi dataframe;6.593455246
 kubernetes;3;2;Group By;40.61579595
 kubernetes;3;2;Repartition;40.41039377
 kubernetes;3;2;Inner join;22.40991176
 kubernetes;3;2;Broadcast inner join;19.86025492
-kubernetes;3;2;SHA-512;0
-kubernetes;3;2;Calculate Pi;0
-kubernetes;3;2;Calculate Pi dataframe;0
+kubernetes;3;2;SHA-512;28.85052352
+kubernetes;3;2;Calculate Pi;17.51317118
+kubernetes;3;2;Calculate Pi dataframe;6.275214291
 kubernetes;1;1;Group By;52.47779848
 kubernetes;1;1;Repartition;43.89136764
 kubernetes;1;1;Inner join;42.71834113
 kubernetes;1;1;Broadcast inner join;32.45242712
-kubernetes;1;1;SHA-512;0
-kubernetes;1;1;Calculate Pi;0
-kubernetes;1;1;Calculate Pi dataframe;0
+kubernetes;1;1;SHA-512;45.32238829
+kubernetes;1;1;Calculate Pi;18.88329239
+kubernetes;1;1;Calculate Pi dataframe;6.59676053
 kubernetes;2;1;Group By;52.61909136
 kubernetes;2;1;Repartition;54.45787452
 kubernetes;2;1;Inner join;40.332305
 kubernetes;2;1;Broadcast inner join;32.11700161
-kubernetes;2;1;SHA-512;0
-kubernetes;2;1;Calculate Pi;0
-kubernetes;2;1;Calculate Pi dataframe;0
+kubernetes;2;1;SHA-512;45.58378477
+kubernetes;2;1;Calculate Pi;19.60086784
+kubernetes;2;1;Calculate Pi dataframe;6.525080131
 kubernetes;3;1;Group By;52.9892285
 kubernetes;3;1;Repartition;48.27771044
 kubernetes;3;1;Inner join;39.87684654
 kubernetes;3;1;Broadcast inner join;33.94142384
-kubernetes;3;1;SHA-512;0
-kubernetes;3;1;Calculate Pi;0
-kubernetes;3;1;Calculate Pi dataframe;0
+kubernetes;3;1;SHA-512;45.07468343
+kubernetes;3;1;Calculate Pi;18.57190092
+kubernetes;3;1;Calculate Pi dataframe;6.385386418
