@@ -7,11 +7,12 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Vertical Scaling
 ```{r, echo=FALSE}
 # import data
 library(readr)
 dd <- read_delim("data.csv", ";", escape_double = FALSE, trim_ws = TRUE)
-dd$benchmark_description <- factor(dd$benchmark_description, levels=c("Gluster (Single DB)", "Docker (Single DB)", "Swarm (Single DB)", "Swarm (Multi DB)", "Pgpool II (Multi DB)"))
+dd$benchmark_description <- factor(dd$benchmark_description, levels=c("Docker (Single DB)", "Swarm (Single DB)", "Gluster", "Streaming Replication", "Load Balancing", "Partitioning", "Sharding"))
 dd$read_only <- as.logical(dd$read_only)
 dd$clients <- as.factor(dd$clients)
 library(data.table)

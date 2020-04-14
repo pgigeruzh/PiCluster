@@ -88,11 +88,11 @@ docker exec -it pgbench bash
 sudo su - postgres
 
 # Create an emty database on the test subject e.g. postgresmaster
-# (the command below only works if Postgres runs on localhost)
-createdb bench_test
-
-# Initialize database with 1000000 rows
 # (-h: hostname)
+createdb -h postgresmaster bench_test
+
+# Initialize database with 1000000 rows (-s: scaling factor)
+# (this creates 4 tables: pgbench_accounts, pgbench_branches, pgbench_history, pgbench_tellers)
 pgbench -h postgresmaster -i -s 10 bench_test
 
 # Run benchmark
