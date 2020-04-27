@@ -251,3 +251,10 @@ kubernetes;3;1;Broadcast inner join;33.94142384
 kubernetes;3;1;SHA-512;45.07468343
 kubernetes;3;1;Calculate Pi;18.57190092
 kubernetes;3;1;Calculate Pi dataframe;6.385386418
+mac;1;1;Group By;19.08373398
+mac;1;1;Repartition;4.808052019
+mac;1;1;Inner join;7.260565342
+mac;1;1;Broadcast inner join;5.618064395
+mac;1;1;SHA-512;8.733596563
+mac;1;1;Calculate Pi;7.160114993
+mac;1;1;Calculate Pi dataframe;0.897369893
