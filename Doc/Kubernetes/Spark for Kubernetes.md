@@ -52,23 +52,28 @@ metadata:
 spec:
   selector:
     app: spark-master
+  type: NodePort
   ports:
-  - name: web-ui
+  - name: spark-ui
     protocol: TCP
     port: 8080
     targetPort: 8080
+  - name: jupyter-ui
+    protocol: TCP
+    port: 8888
+    targetPort: 8888
   - name: master
     protocol: TCP
     port: 7077
     targetPort: 7077
   - name: master-blockmanager
     protocol: TCP
-    port: 41001
-    targetPort: 41001
+    port: 4001
+    targetPort: 4001
   - name: master-driver
     protocol: TCP
-    port: 41002
-    targetPort: 41002
+    port: 4002
+    targetPort: 4002
   externalIPs:
     - 192.168.0.XXX
 ---
@@ -87,18 +92,31 @@ spec:
       labels:
         app: spark-master
     spec:
+      #nodeName: <device-hostname>
       hostname: spark-master
       containers:
       - name: spark-master
         image: pgigeruzh/spark:arm
         command: ["/bin/sh","-c"]
-        args: ['unset SPARK_MASTER_PORT; echo "$(hostname -i) spark-master" >> /etc/hosts; bin/spark-class org.apache.spark.deploy.master.Master --ip spark-master --port 7077 --cores 4']
+        args: ['unset SPARK_MASTER_PORT; echo "$(hostname -i) spark-master" >> /etc/hosts; bin/spark-class org.apache.spark.deploy.master.Master --ip spark-master --port 7077']
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         - containerPort: 7077
-        - containerPort: 41001
-        - containerPort: 41002
+        - containerPort: 4001
+        - containerPort: 4002
+        volumeMounts:
+          - mountPath: /mnt/glusterfs
+            name: glusterfsvol
+        resources:
+          requests:
+            cpu: 100m
+      - name: jupyter
+        image: pgigeruzh/spark:arm
+        command: ["/bin/sh","-c"]
+        args: ['jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token="" --NotebookApp.password="" --notebook-dir="/mnt/glusterfs"']
+        ports:
+        - containerPort: 8888
         volumeMounts:
           - mountPath: /mnt/glusterfs
             name: glusterfsvol
@@ -184,9 +202,9 @@ kubectl exec spark-master-dd66f8f77-pfzj6 -it -- bash
 ```
 5. Run spark-submit
 ```
-spark-submit --master spark://spark-master:7077 --conf spark.driver.port=41002 --conf spark.blockManager.port=41001 /mnt/glusterfs/myfile.py
+spark-submit --master spark://spark-master:7077 --conf spark.driver.port=4002 --conf spark.blockManager.port=4001 /mnt/glusterfs/myfile.py
 ```
-
+Note: The chosen ports 4001 and 4002 we opened in the spark master service.
 # Copying a file into GlusterFS
 1. Mount the virtual volume
 ```
