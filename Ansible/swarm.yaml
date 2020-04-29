@@ -22,7 +22,7 @@
     - name: Remove Gluster Server
       apt: name=glusterfs-server state=absent purge=yes autoremove=yes
       poll: 10
-      async: 40
+      async: 60
 
     - name: Delete Gluster Volumes
       file:
@@ -54,7 +54,7 @@
     - name: "Install Gluster Server"
       apt: name=glusterfs-server state=latest
       poll: 10
-      async: 40
+      async: 60
 
     - name: Enable Gluster Service
       service:
@@ -74,7 +74,7 @@
     - name: Install Docker Gluster Plugin
       shell: docker plugin install --alias gluster jmb12686/glusterfs-volume-plugin --grant-all-permissions --disable
       poll: 10
-      async: 300
+      async: 600
 
     - name: Setup Docker Plugin
       shell: docker plugin set gluster SERVERS="{{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
