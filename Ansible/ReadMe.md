@@ -41,7 +41,7 @@ ansible all -m shell -a "hostname"
 ansible all -m shell -a "df -h"
 
 # or reboot
-ansible all -m reboot -i inventory.ini
+ansible all -m reboot --become -i inventory.ini
 ```
 
 # Ansible Playbooks
