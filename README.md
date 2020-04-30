@@ -27,7 +27,7 @@ sudo raspi-config
 sudo reboot
 ```
 
-For setting up the Raspberry Pi cluster with Docker Swarm + GlusterFS automatically, you have to install Ansible on your PC and adjust the inventory.ini file to your needs (instructions [here](https://github.com/pgigeruzh/PiCluster/tree/master/Ansible)). Afterward, you should be able to run the provided Ansible scripts. Please note that the Raspberry Pi is not very robust which means that the scripts can fail (e.g. timeout). If this happens, just re-run the script. In case a Raspberry Pi does not reboot correctly (happens often), disconnect/reconnect power and wait for Ansible to finish. Some scripts might take a long time (20 minutes) to finish because the Raspberry Pi is rather slow.
+For setting up the Raspberry Pi cluster with **Docker Swarm + GlusterFS** automatically, you have to install **Ansible** on your PC and adjust the inventory.ini file to your needs (instructions [here](https://github.com/pgigeruzh/PiCluster/tree/master/Ansible)). Afterward, you should be able to run the provided Ansible scripts. Please note that the Raspberry Pi is not very robust which means that the scripts can fail (e.g. timeout). If this happens, just re-run the script. In case a Raspberry Pi does not reboot correctly (happens often), disconnect/reconnect power and wait for Ansible to finish. Some scripts might take a long time (20 minutes) to finish because the Raspberry Pi is rather slow.
 
 ```bash
 # install utilities such as vim/git
@@ -52,7 +52,7 @@ docker service create --name=viz --publish=80:8080/tcp --constraint=node.role==m
 docker service rm viz
 ```
 
-Last but not least, you can deploy Spark on your Raspberry Pi cluster (detailed instructions [here](https://github.com/pgigeruzh/spark)). Adjust the parameters (e.g. --replicas 4) to your needs. Now, you have access to JupyterLab on port 8888 and Spark on port 8080. The practical exercises can be found [here](https://github.com/pgigeruzh/PiCluster/tree/master/Exercises).
+Last but not least, you can deploy **Spark** on your Raspberry Pi cluster (detailed instructions [here](https://github.com/pgigeruzh/spark)). Adjust the parameters (e.g. --replicas 4) to your needs. Now, you have access to JupyterLab on port 8888 and Spark on port 8080. The practical exercises can be found [here](https://github.com/pgigeruzh/PiCluster/tree/master/Exercises).
 
 ```bash
 # create an attachable overlay network
