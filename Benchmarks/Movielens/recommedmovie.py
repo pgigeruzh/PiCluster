@@ -60,9 +60,14 @@ def loadMovieNames():
     with open(movies_path, encoding='utf-8', errors='replace') as f:
         if CONTAINS_HEADER == "true":
             f.readline()
-        csv_reader = reader(f, delimiter=DELIMITER)
-        for line in csv_reader:
-            movieNames[int(line[0])] = str(line[1]).encode('ascii', 'ignore').decode()
+        if len(DELIMITER) != 1:
+            for line in f:
+                fields = line.split(DELIMITER)
+                movieNames[int(fields[0])] =  str(fields[1]).encode('ascii', 'ignore').decode()
+        else:
+            csv_reader = reader(f, delimiter=DELIMITER)
+            for line in csv_reader:
+                movieNames[int(line[0])] = str(line[1]).encode('ascii', 'ignore').decode()
     return movieNames
 
 
