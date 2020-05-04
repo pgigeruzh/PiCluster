@@ -22,10 +22,10 @@ Tags:
 --delim=","  the delimitor/seperator of the file set to e.g a comma
 --used=2     the user id to recommend set to e.g id 2
 
-spark-submit --master spark://spark-master:7077  recommedmovie.py u.item u.data
-spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-1m/movies.dat ./ml-1m/ratings.dat --delim="::"
-spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-10M100K/movies.dat ./10M100K/ratings.dat --delim="::"
-spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-20m/movies.csv ./ml-20m/ratings.csv --delim=","
+spark-submit --master spark://spark-master:7077  recommendmovie.py u.item u.data
+spark-submit --master spark://spark-master:7077  recommendmovie.py ./ml-1m/movies.dat ./ml-1m/ratings.dat --delim="::"
+spark-submit --master spark://spark-master:7077  recommendmovie.py ./ml-10M100K/movies.dat ./10M100K/ratings.dat --delim="::"
+spark-submit --master spark://spark-master:7077  recommendmovie.py ./ml-20m/movies.csv ./ml-20m/ratings.csv --delim=","
 '''
 from pyspark.sql import SparkSession
 from pyspark.ml.recommendation import ALS
