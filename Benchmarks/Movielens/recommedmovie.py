@@ -1,5 +1,8 @@
 '''
-Requires: 
+Recommends movies to a specified user based on other users preferences
+Parameters e.g: program.py movies.csv ratings.csv --delim="," --user=2
+
+Requires:
 sudo apt-get install python-numpy
 [or] pip3 install scipy
 
@@ -16,13 +19,13 @@ Run:
 program <movies_file> <ratings_file> <tag>
 
 Tags:
---delim: the delimitor/seperator of the file e.g --delim=","
---header: specify if the file has headers e.g --deader="true"
+--delim=","  the delimitor/seperator of the file set to e.g a comma
+--used=2     the user id to recommend set to e.g id 2
 
 spark-submit --master spark://spark-master:7077  recommedmovie.py u.item u.data
 spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-1m/movies.dat ./ml-1m/ratings.dat --delim="::"
 spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-10M100K/movies.dat ./10M100K/ratings.dat --delim="::"
-spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-20m/movies.csv ./ml-20m/ratings.csv --delim="," --header="true"
+spark-submit --master spark://spark-master:7077  recommedmovie.py ./ml-20m/movies.csv ./ml-20m/ratings.csv --delim=","
 '''
 from pyspark.sql import SparkSession
 from pyspark.ml.recommendation import ALS
@@ -39,13 +42,14 @@ parser = argparse.ArgumentParser()
 parser.add_argument("movies_file", help="Movies File")
 parser.add_argument("ratings_file", help="Ratings File")
 parser.add_argument("--delimit", default="|", help="The delimiter of the file: e.g --delimit=\"::\"")
-parser.add_argument("--header", default="false", help="If file contains header: --header=\"true\"")
+parser.add_argument("--user", default=1, type=int, help="The user id to recoment: e.g --user=1")
 args = parser.parse_args()
 
 DELIMITER = args.delimit
 MOVIES_FILE = args.movies_file
 RATINGS_FILE = args.ratings_file
-CONTAINS_HEADER = args.header
+USER_ID = args.user
+CONTAINS_HEADER = "false"
 
 rating_schema = StructType([
     StructField("userID", IntegerType()),
@@ -53,6 +57,12 @@ rating_schema = StructType([
     StructField("rating", DoubleType()),
     StructField("timestamp", IntegerType())])
 
+def check_header():
+    global CONTAINS_HEADER
+    with open(MOVIES_FILE, encoding='ascii', errors='ignore') as f:
+        first_line = f.readline()
+        fields = first_line.split(DELIMITER)
+        CONTAINS_HEADER = "false" if fields[0].isnumeric() else "true"
 
 def loadMovieNames():
     movies_path = MOVIES_FILE
@@ -79,31 +89,29 @@ def parseInput(line):
     return Row(userID = int(fields[0]), movieID = int(fields[1]), rating = float(fields[2]))
 
 
-def get_ratings(ratings, movieNames, userID = 1, take_num = 10):
+def get_ratings(ratings, movieNames, userID = USER_ID, take_num = 10):
     userRatings = ratings.filter(f"userID={userID}")
     ratings_list = userRatings.take(take_num)
     return ratings_list
 
 
-def get_recommendations(model, ratings, movieNames, userID = 1, take_num = 10):
+def get_recommendations(model, ratings, movieNames, userID = USER_ID, take_num = 10):
     ratingCounts = ratings.groupBy("movieID").count().filter("count > 100")
     popularMovies = ratingCounts.select("movieID").withColumn('userID', lit(userID))
     recommendations = model.transform(popularMovies)
     recommendations_sorted = recommendations.sort(recommendations.prediction.desc()).take(take_num)
     return recommendations_sorted
 
-if __name__ == "__main__":
-    start_time = time.time()
-
+def main():
     spark = SparkSession.builder.appName("RecommendMovies").getOrCreate()
+    check_header()
     movieNames = loadMovieNames()
     if CONTAINS_HEADER == "true":
-        df = spark.read.load(RATINGS_FILE, format="csv", header=CONTAINS_HEADER, sep=DELIMITER, schema=rating_schema).rdd
+        rating_df = spark.read.load(RATINGS_FILE, format="csv", header=CONTAINS_HEADER, sep=DELIMITER, schema=rating_schema).rdd
     else: # older movielens db use double char delimiters :: not supported by spark
-        df = spark.read.text(RATINGS_FILE).rdd
-        df = df.map(parseInput)
+        rating_df = spark.read.text(RATINGS_FILE).rdd.map(parseInput)
 
-    ratings = spark.createDataFrame(df).cache()
+    ratings = spark.createDataFrame(rating_df).cache()
     als = ALS(maxIter=5, regParam=0.01, userCol="userID", itemCol="movieID", ratingCol="rating")
     model = als.fit(ratings)
 
@@ -111,27 +119,29 @@ if __name__ == "__main__":
     spark.conf.set("spark.sql.crossJoin.enabled", "true")
     user_recommendations = get_recommendations(model, ratings, movieNames)
     spark.stop()
+
+    print("------------------------------------------------")
+    print(f"> Ratings of userID {USER_ID}:")
+    for rating in user_ratings:
+        movie_name = movieNames[int(rating['movieID'])]
+        rating_value = rating['rating']
+        print("{:<50} {:<}".format(movie_name[:40],rating_value))
+    print("------------------------------------------------")
+
+    print("------------------------------------------------")
+    print(f"> Recommended Movies for userID {USER_ID}:")
+    for recommendation in user_recommendations:
+        movie_name = movieNames[int(recommendation['movieID'])]
+        rating_value = round(float(recommendation['prediction']),2)
+        print("{:<50} {:<}".format(movie_name[:40],rating_value))
+    print("------------------------------------------------")
+
+
+if __name__ == "__main__":
+    start_time = time.time()
+    main()
     runtime = time.time() - start_time
 
-    print("------------------------")
+    print("------------------------------------------------")
     print("Runtime: ", runtime)
-    print("------------------------")
-
-
-    print("------------------------")
-    print("> Ratings for userID 1:")
-    for rating in user_ratings:
-        print (movieNames[int(rating['movieID'])], rating['rating'])
-    print("------------------------")
-
-
-    print("------------------------")
-    print("> Recommended Movies for userID 1:")
-    for recommendation in user_recommendations:
-        print (movieNames[int(recommendation['movieID'])], recommendation['prediction'])
-    print("------------------------")
-
-
-    print("------------------------")
-    print("Runtime: ", runtime)
-    print("------------------------")
+    print("------------------------------------------------")
