@@ -43,18 +43,37 @@ spark-submit --master yarn --deploy-mode cluster --num-executors 14 --executor-c
 
 ## Movielens
 
-This is not a benchmark but a real-world dataset (https://grouplens.org/datasets/movielens/). An example project that uses the movielens dataset can be found in "Movielens/draft.py". The file is originally from: https://gist.github.com/jianyu0503/4753344051572c8fc7aa18123eafd2cc
+This is not a benchmark but a real-world dataset (https://grouplens.org/datasets/movielens/).
 
+The benchmark used can be found at  `Movielens/ml-benchmark`, it runs 3 tests namely:
+1. Finds the top rated movies containing a keyword, sorted by average rating, can set keyboard with --search="keyword"
+2. Shows to top movies of a particular genre, can set genre with e.g --genre="Comedy"
+3. Recommends movies to a specified user based on other users preferences e.g --user=2
+
+The benchmarks tests manual defined map reduce, spark's sql library, and spark's ML libray. We also measure the time to load the database and the total runtime.
 ```bash
 # download largest movielens dataset (190MB)
 wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
 unzip ml-20m.zip
 
-# spark-submit movielens.py (takes around 5 minutes to finish)
-# don't forget to change the file paths!
-spark-submit --master spark://sparkmaster:7077 --packages com.databricks:spark-csv_2.11:1.5.0 movielens.py
+# Run, remember to set the correct file-path and spark master hostname
+spark-submit --master spark://sparkmaster:7077  ml-benchmark.py ./ml-20m/movies.csv ./ml-20m/ratings.csv
 ```
-
+Sample Result
+```bash
+# tables omitted for brevity
+------------------------------
+RESULTS
+------------------------------
+Load DB Time:           11.610222339630127
+Map Reduce Time:        106.47479510307312
+Sql Time:               65.75746655464172
+Recommendation Time:    203.6552722454071
+Total Runtime:          388.2532744407654
+------------------------------
+```
+------
+ An example project that uses the movielens dataset can be found in "Movielens/draft.py". The file is originally from: https://gist.github.com/jianyu0503/4753344051572c8fc7aa18123eafd2cc  
 For Yarn-Cluster
 ```bash
 hdfs dfs -copyFromLocal /opt/spark/examples/ml-20m /ml-20m

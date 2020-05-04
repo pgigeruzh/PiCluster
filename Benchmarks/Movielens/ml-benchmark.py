@@ -138,19 +138,19 @@ def main():
     spark = SparkSession.builder.appName("mlbenchmarks").getOrCreate()
     check_header()
     movies_df, rating_df = load_dataframes(spark)
-    timings.append("Load DB Time:\t"+ str(time.time() - start_time0))
+    timings.append("Load DB Time:\t\t"+ str(time.time() - start_time0))
 
     start_time1 = time.time()
     res1 = test_search(spark,  movies_df, rating_df)
-    timings.append("Search Time:\t"+ str(time.time() - start_time1))
+    timings.append("Map Reduce Time:\t"+ str(time.time() - start_time1))
 
     start_time2 = time.time()
     res2 = test_genre(spark,  movies_df, rating_df)
-    timings.append("Genre Time:\t"+ str(time.time() - start_time2))
+    timings.append("Sql Time:\t\t"+ str(time.time() - start_time2))
 
     start_time3 = time.time()
     res3 = test_recommend(spark,  movies_df, rating_df)
-    timings.append("Recommend Time:\t"+ str(time.time() - start_time3))
+    timings.append("Recommendation Time:\t"+ str(time.time() - start_time3))
 
     spark.stop()
     print(f"> Top 10 movies containing keyword \"{SEARCH_TERM}\"")
@@ -168,7 +168,7 @@ def main():
 if __name__ == "__main__":
     start_time = time.time()
     timings = main()
-    timings.append("Run Time:\t"+ str(time.time() - start_time))
+    timings.append("Total Runtime:\t\t"+ str(time.time() - start_time))
 
     print("------------------------------")
     print("RESULTS")
