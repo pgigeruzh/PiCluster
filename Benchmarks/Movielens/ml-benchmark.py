@@ -1,3 +1,21 @@
+'''
+Database:
+sudo wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
+sudo unzip ml-20m.zip
+
+Run:
+spark-submit --master spark://spark-master:7077  ml-benchmark.py ./ml-20m/movies.csv ./ml-20m/ratings.csv
+
+Requires:
+sudo apt-get install python3-numpy
+[or] pip3 install scipy
+if Python < 3.7 run: export PYTHONIOENCODING=UTF-8 
+
+Tests:
+1. Finds the top rated movies containing a keyword, sorted by average rating, can set keyboard with --search="keyword"
+2. Shows to top movies of a particular genre, can set genre with e.g --genre="Comedy"
+3. Recommends movies to a specified user based on other users preferences e.g --user=2
+'''
 from io import StringIO
 import argparse
 import time
