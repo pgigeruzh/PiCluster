@@ -56,22 +56,25 @@ Last but not least, you can deploy **Spark** on your Raspberry Pi cluster (detai
 
 ```bash
 # create an attachable overlay network
+# (all spark containers have to be within the same network to be able to connect)
 docker network create -d overlay --attachable spark
 ```
 
 ```bash
 # run spark master
-# (first run might take about 10 minutes because it has to download the image)
+# (first run might take about 10 minutes because it has to download the image on all RPi)
 docker service create --name sparkmaster --network spark --constraint=node.role==manager --publish 8080:8080 --publish 7077:7077 --mount source=gfs,destination=/gfs pgigeruzh/spark:arm bin/spark-class org.apache.spark.deploy.master.Master
 ```
 
 ```bash
 # run spark workers
+# (runs four workers and mounts gluster at /gfs to synchronize files accross all nodes)
 docker service create --replicas 4 --replicas-max-per-node 1 --name sparkworker --network spark --publish 8081:8081 --mount source=gfs,destination=/gfs pgigeruzh/spark:arm bin/spark-class org.apache.spark.deploy.worker.Worker spark://sparkmaster:7077
 ```
 
 ```bash
 # run jupyter lab
-docker service create --name jupyterlab --network spark --publish 8888:8888 --mount source=gfs,destination=/gfs pgigeruzh/spark:arm jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password='' --notebook-dir='/gfs'
+# (on the manager because it mounts the docker socket to be able to run services from within)
+docker service create --name jupyterlab --network spark --constraint=node.role==manager --publish 8888:8888 --mount source=gfs,destination=/gfs --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock -e SHELL=/bin/bash pgigeruzh/spark:arm jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token='' --NotebookApp.password='' --notebook-dir='/gfs'
 ```
 
