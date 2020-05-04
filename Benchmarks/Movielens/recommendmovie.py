@@ -52,8 +52,8 @@ USER_ID = args.user
 CONTAINS_HEADER = "false"
 
 rating_schema = StructType([
-    StructField("userID", IntegerType()),
-    StructField("movieID", IntegerType()),
+    StructField("userId", IntegerType()),
+    StructField("movieId", IntegerType()),
     StructField("rating", DoubleType()),
     StructField("timestamp", IntegerType())])
 
@@ -86,18 +86,18 @@ def parseInput(line):
         fields = line.value.split('\t')
     else:
         fields = line.value.split(DELIMITER)
-    return Row(userID = int(fields[0]), movieID = int(fields[1]), rating = float(fields[2]))
+    return Row(userId = int(fields[0]), movieId = int(fields[1]), rating = float(fields[2]))
 
 
-def get_ratings(ratings, movieNames, userID = USER_ID, take_num = 10):
-    userRatings = ratings.filter(f"userID={userID}")
+def get_ratings(ratings, movieNames, take_num = 10):
+    userRatings = ratings.filter(f"userId='{USER_ID}'")
     ratings_list = userRatings.take(take_num)
     return ratings_list
 
 
-def get_recommendations(model, ratings, movieNames, userID = USER_ID, take_num = 10):
-    ratingCounts = ratings.groupBy("movieID").count().filter("count > 100")
-    popularMovies = ratingCounts.select("movieID").withColumn('userID', lit(userID))
+def get_recommendations(model, ratings, movieNames, take_num = 10):
+    ratingCounts = ratings.groupBy("movieId").count().filter("count > 100")
+    popularMovies = ratingCounts.select("movieId").withColumn('userId', lit(USER_ID))
     recommendations = model.transform(popularMovies)
     recommendations_sorted = recommendations.sort(recommendations.prediction.desc()).take(take_num)
     return recommendations_sorted
@@ -112,7 +112,7 @@ def main():
         rating_df = spark.read.text(RATINGS_FILE).rdd.map(parseInput)
 
     ratings = spark.createDataFrame(rating_df).cache()
-    als = ALS(maxIter=5, regParam=0.01, userCol="userID", itemCol="movieID", ratingCol="rating")
+    als = ALS(maxIter=5, regParam=0.01, userCol="userId", itemCol="movieId", ratingCol="rating")
     model = als.fit(ratings)
 
     user_ratings = get_ratings(ratings, movieNames)
@@ -121,17 +121,17 @@ def main():
     spark.stop()
 
     print("------------------------------------------------")
-    print(f"> Ratings of userID {USER_ID}:")
+    print(f"> Ratings of userId {USER_ID}:")
     for rating in user_ratings:
-        movie_name = movieNames[int(rating['movieID'])]
+        movie_name = movieNames[int(rating['movieId'])]
         rating_value = rating['rating']
         print("{:<50} {:<}".format(movie_name[:40],rating_value))
     print("------------------------------------------------")
 
     print("------------------------------------------------")
-    print(f"> Recommended Movies for userID {USER_ID}:")
+    print(f"> Recommended Movies for userId {USER_ID}:")
     for recommendation in user_recommendations:
-        movie_name = movieNames[int(recommendation['movieID'])]
+        movie_name = movieNames[int(recommendation['movieId'])]
         rating_value = round(float(recommendation['prediction']),2)
         print("{:<50} {:<}".format(movie_name[:40],rating_value))
     print("------------------------------------------------")
