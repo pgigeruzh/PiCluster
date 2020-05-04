@@ -3,7 +3,7 @@ Recommends movies to a specified user based on other users preferences
 Parameters e.g: program.py movies.csv ratings.csv --delim="," --user=2
 
 Requires:
-sudo apt-get install python-numpy
+sudo apt-get install python3-numpy
 [or] pip3 install scipy
 
 Databases:
