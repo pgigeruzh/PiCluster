@@ -9,7 +9,6 @@ spark-submit --master spark://spark-master:7077  ml-benchmark.py ./ml-20m/movies
 Requires:
 1. sudo apt-get install python3-numpy -y
 [or] pip3 install scipy
-2. if Python < 3.7 run: export PYTHONIOENCODING=UTF-8 
 
 Tests:
 1. Finds the top rated movies containing a keyword, sorted by average rating, can set keyboard with --search="keyword"
