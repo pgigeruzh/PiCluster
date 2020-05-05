@@ -7,9 +7,9 @@ Run:
 spark-submit --master spark://spark-master:7077  ml-benchmark.py ./ml-20m/movies.csv ./ml-20m/ratings.csv
 
 Requires:
-sudo apt-get install python3-numpy
+1. sudo apt-get install python3-numpy -y
 [or] pip3 install scipy
-if Python < 3.7 run: export PYTHONIOENCODING=UTF-8 
+2. if Python < 3.7 run: export PYTHONIOENCODING=UTF-8 
 
 Tests:
 1. Finds the top rated movies containing a keyword, sorted by average rating, can set keyboard with --search="keyword"
@@ -20,6 +20,7 @@ from io import StringIO
 import argparse
 import time
 import sys
+import os
 
 from pyspark.sql import SparkSession, Row
 import pyspark.sql.functions as sf
@@ -30,6 +31,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("movies_file", help="Movies File")
 parser.add_argument("ratings_file", help="Ratings File")
 parser.add_argument("--delimit", default=",", help="The delimiter of the file: e.g --delimit=\"::\"")
+parser.add_argument("--header", default='true', help="file containes heeader: --header=\"true\"")
 parser.add_argument("--search", default='the', help="term to search for: --search=\"star\"")
 parser.add_argument("--genre", default="Comedy", help="The desired genre: e.g --genre=\"Drama\"")
 parser.add_argument("--user", default=1, type=int, help="The user id to recoment: e.g --user=1")
@@ -41,7 +43,7 @@ DELIMITER = args.delimit
 SEARCH_TERM =  args.search
 GENRE = args.genre
 USER_ID = args.user
-CONTAINS_HEADER = "false"
+CONTAINS_HEADER = args.header
 
 rating_schema = StructType([
     StructField("userId", IntegerType()),
@@ -62,20 +64,21 @@ def parse_movies(line):
     fields = line.value.split(DELIMITER)
     return Row(movieId = int(fields[0]), title = str(fields[1]).encode('ascii', 'ignore').decode(),  genres = str(fields[2]).encode('ascii', 'ignore').decode() )
 
+def check_os():
+    if sys.version_info[0] < 3:
+        raise Exception("Python 2 detected, needs python 3")
+    if sys.version_info[1] < 6:
+        raise Exception("Python < 3.6 does not suppor f-strings")
+    if not os.environ.get('PYTHONIOENCODING'):
+        os.environ['PYTHONIOENCODING'] = 'UTF-8'
 
-def check_header():
-    global CONTAINS_HEADER
-    with open(MOVIES_FILE, encoding='ascii', errors='ignore') as f:
-        first_line = f.readline()
-        fields = first_line.split(DELIMITER)
-        CONTAINS_HEADER = "false" if fields[0].isnumeric() else "true"
 
 def save_show_output(df):
     old_stdout = sys.stdout
     new_stdout = StringIO()
     sys.stdout = new_stdout
     df.show(10, False)
-    output = new_stdout.getvalue()
+    output = str(new_stdout.getvalue()).encode('ascii', 'ignore').decode()
     sys.stdout = old_stdout
     return output
 
@@ -136,7 +139,6 @@ def main():
 
     start_time0 = time.time()
     spark = SparkSession.builder.appName("mlbenchmarks").getOrCreate()
-    check_header()
     movies_df, rating_df = load_dataframes(spark)
     timings.append("Load DB Time:\t\t"+ str(time.time() - start_time0))
 
@@ -166,6 +168,7 @@ def main():
 
 
 if __name__ == "__main__":
+    check_os()
     start_time = time.time()
     timings = main()
     timings.append("Total Runtime:\t\t"+ str(time.time() - start_time))
