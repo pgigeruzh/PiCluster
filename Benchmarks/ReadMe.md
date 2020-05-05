@@ -56,6 +56,9 @@ The benchmarks tests manual defined map reduce, spark's sql library, and spark's
 wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
 unzip ml-20m.zip
 
+# install numpy
+sudo apt-get install python3-numpy -y
+
 # Run, remember to set the correct file-path and spark master hostname
 spark-submit --master spark://sparkmaster:7077  ml-benchmark.py ./ml-20m/movies.csv ./ml-20m/ratings.csv
 ```
@@ -72,31 +75,6 @@ Recommendation Time:    203.6552722454071
 Total Runtime:          388.2532744407654
 ------------------------------
 ```
-------
- An example project that uses the movielens dataset can be found in "Movielens/draft.py". The file is originally from: https://gist.github.com/jianyu0503/4753344051572c8fc7aa18123eafd2cc  
-For Yarn-Cluster
-```bash
-hdfs dfs -copyFromLocal /opt/spark/examples/ml-20m /ml-20m
-hdfs dfsadmin -safemode leave
-spark-submit --master yarn --deploy-mode cluster --num-executors 14 --packages com.databricks:spark-csv_2.11:1.5.0 movielens.py hdfs://192.168.1.187:9000/ml-20m
-```
-Output Yarn
-```bash
-+------+----+
-|   tag| cnt|
-+------+----+
-|sci-fi|3384|
-+------+----+
-
-+------+-------+
-|genres|    cnt|
-+------+-------+
-| Drama|1467402|
-+------+-------+
-
-Duration: 4min 32 sec
-```
-
 ## Postgres
 
 ```bash

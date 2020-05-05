@@ -1,0 +1,33 @@
+---
+title: "Movielens-Benchmark"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+# import data
+library(readr)
+dd <- read_delim("data.csv", ";", escape_double = FALSE, col_types = cols(workers = col_number()), trim_ws = TRUE)
+library(data.table)
+dd <- as.data.table(dd)
+dd$platform <- as.factor(dd$platform)
+dd$workers <- as.factor(dd$workers)
+dd$benchmark <- as.factor(dd$benchmark)
+dd$seconds <- as.numeric(dd$seconds)
+dd$benchmark = with(dd, reorder(benchmark, seconds, median))
+
+library(ggplot2)
+library(scales)
+
+# plot 1
+dd1 <- dd[, list(seconds=mean(seconds)), by=list(workers, platform)]
+ggplot(dd1, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + xlab("Workers") + ylab("Average Benchmark Duration (Seconds)")
+# plot 2
+dd2 <- dd[, list(seconds=mean(seconds)), by=list(benchmark, workers, platform)]
+ggplot(dd2, aes(x=benchmark, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + facet_grid(workers ~ ., scales='fixed') + xlab("Benchmark for each Platform and Worker") + ylab("Average Benchmark Duration (Seconds)")
+
+dd2
+```

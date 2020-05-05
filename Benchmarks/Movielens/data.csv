@@ -1,109 +1,61 @@
-platform,run,workers,benchmark,seconds
-swarm,1,4,Load DB,
-swarm,1,4,Map Reduce,
-swarm,1,4,Sql,
-swarm,1,4,#Total runtime,
-swarm,2,4,Load DB,
-swarm,2,4,Map Reduce,
-swarm,2,4,Sql,
-swarm,2,4,#Total runtime,
-swarm,3,4,Load DB,
-swarm,3,4,Map Reduce,
-swarm,3,4,Sql,
-swarm,3,4,#Total runtime,
-swarm,1,4,Load DB,
-swarm,1,4,Map Reduce,
-swarm,1,4,Sql,
-swarm,1,4,#Total runtime,
-swarm,2,4,Load DB,
-swarm,2,4,Map Reduce,
-swarm,2,4,Sql,
-swarm,2,4,#Total runtime,
-swarm,3,4,Load DB,
-swarm,3,4,Map Reduce,
-swarm,3,4,Sql,
-swarm,3,4,#Total runtime,
-swarm,1,4,Load DB,
-swarm,1,4,Map Reduce,
-swarm,1,4,Sql,
-swarm,1,4,#Total runtime,
-swarm,2,4,Load DB,
-swarm,2,4,Map Reduce,
-swarm,2,4,Sql,
-swarm,2,4,#Total runtime,
-swarm,3,4,Load DB,
-swarm,3,4,Map Reduce,
-swarm,3,4,Sql,
-swarm,3,4,#Total runtime,
-yarn,1,4,Load DB,
-yarn,1,4,Map Reduce,
-yarn,1,4,Sql,
-yarn,1,4,#Total runtime,
-yarn,2,4,Load DB,
-yarn,2,4,Map Reduce,
-yarn,2,4,Sql,
-yarn,2,4,#Total runtime,
-yarn,3,4,Load DB,
-yarn,3,4,Map Reduce,
-yarn,3,4,Sql,
-yarn,3,4,#Total runtime,
-yarn,1,4,Load DB,
-yarn,1,4,Map Reduce,
-yarn,1,4,Sql,
-yarn,1,4,#Total runtime,
-yarn,2,4,Load DB,
-yarn,2,4,Map Reduce,
-yarn,2,4,Sql,
-yarn,2,4,#Total runtime,
-yarn,3,4,Load DB,
-yarn,3,4,Map Reduce,
-yarn,3,4,Sql,
-yarn,3,4,#Total runtime,
-yarn,1,4,Load DB,
-yarn,1,4,Map Reduce,
-yarn,1,4,Sql,
-yarn,1,4,#Total runtime,
-yarn,2,4,Load DB,
-yarn,2,4,Map Reduce,
-yarn,2,4,Sql,
-yarn,2,4,#Total runtime,
-yarn,3,4,Load DB,
-yarn,3,4,Map Reduce,
-yarn,3,4,Sql,
-yarn,3,4,#Total runtime,
-kubernetes,1,4,Load DB,
-kubernetes,1,4,Map Reduce,
-kubernetes,1,4,Sql,
-kubernetes,1,4,#Total runtime,
-kubernetes,2,4,Load DB,
-kubernetes,2,4,Map Reduce,
-kubernetes,2,4,Sql,
-kubernetes,2,4,#Total runtime,
-kubernetes,3,4,Load DB,
-kubernetes,3,4,Map Reduce,
-kubernetes,3,4,Sql,
-kubernetes,3,4,#Total runtime,
-kubernetes,1,4,Load DB,
-kubernetes,1,4,Map Reduce,
-kubernetes,1,4,Sql,
-kubernetes,1,4,#Total runtime,
-kubernetes,2,4,Load DB,
-kubernetes,2,4,Map Reduce,
-kubernetes,2,4,Sql,
-kubernetes,2,4,#Total runtime,
-kubernetes,3,4,Load DB,
-kubernetes,3,4,Map Reduce,
-kubernetes,3,4,Sql,
-kubernetes,3,4,#Total runtime,
-kubernetes,1,4,Load DB,
-kubernetes,1,4,Map Reduce,
-kubernetes,1,4,Sql,
-kubernetes,1,4,#Total runtime,
-kubernetes,2,4,Load DB,
-kubernetes,2,4,Map Reduce,
-kubernetes,2,4,Sql,
-kubernetes,2,4,#Total runtime,
-kubernetes,3,4,Load DB,
-kubernetes,3,4,Map Reduce,
-kubernetes,3,4,Sql,
-kubernetes,3,4,#Total runtime,
+﻿platform;run;workers;benchmark;seconds
+swarm;1;4;Load DB;12.23675895
+swarm;1;4;Map Reduce;85.52086997
+swarm;1;4;SQL;49.75534177
+swarm;1;4;Recommendation;171.3337626
+swarm;1;4;Total;319.9324536
+swarm;2;4;Load DB;12.23427153
+swarm;2;4;Map Reduce;116.5774403
+swarm;2;4;SQL;50.08706784
+swarm;2;4;Recommendation;164.00214
+swarm;2;4;Total;343.9415786
+swarm;3;4;Load DB;12.29598832
+swarm;3;4;Map Reduce;85.02318144
+swarm;3;4;SQL;50.79939008
+swarm;3;4;Recommendation;174.4623911
+swarm;3;4;Total;323.4853368
+swarm;1;3;Load DB;12.1478467
+swarm;1;3;Map Reduce;108.0192506
+swarm;1;3;SQL;63.13278198
+swarm;1;3;Recommendation;219.2158344
+swarm;1;3;Total;403.4209306
+swarm;2;3;Load DB;12.25905442
+swarm;2;3;Map Reduce;108.1123641
+swarm;2;3;SQL;64.1263957
+swarm;2;3;Recommendation;221.9023027
+swarm;2;3;Total;407.6144533
+swarm;3;3;Load DB;12.19376111
+swarm;3;3;Map Reduce;105.0048008
+swarm;3;3;SQL;63.6294384
+swarm;3;3;Recommendation;211.5210953
+swarm;3;3;Total;393.4321773
+swarm;1;2;Load DB;12.17957425
+swarm;1;2;Map Reduce;151.2849185
+swarm;1;2;SQL;88.90951896
+swarm;1;2;Recommendation;346.9345417
+swarm;1;2;Total;599.8748903
+swarm;2;2;Load DB;13.72499275
+swarm;2;2;Map Reduce;149.2127881
+swarm;2;2;SQL;86.52629256
+swarm;2;2;Recommendation;296.3451238
+swarm;2;2;Total;546.2885363
+swarm;3;2;Load DB;12.18012166
+swarm;3;2;Map Reduce;151.9730198
+swarm;3;2;SQL;89.75235438
+swarm;3;2;Recommendation;301.6159348
+swarm;3;2;Total;556.5062616
+swarm;1;1;Load DB;13.15763593
+swarm;1;1;Map Reduce;293.09744
+swarm;1;1;SQL;162.0186408
+swarm;1;1;Recommendation;547.3500783
+swarm;1;1;Total;1015.937096
+swarm;2;1;Load DB;11.2107408
+swarm;2;1;Map Reduce;276.7465057
+swarm;2;1;SQL;160.1137202
+swarm;2;1;Recommendation;533.8508089
+swarm;2;1;Total;982.6052039
+swarm;3;1;Load DB;11.09639597
+swarm;3;1;Map Reduce;278.2199552
+swarm;3;1;SQL;159.9222829
+swarm;3;1;Recommendation;537.3650672
+swarm;3;1;Total;986.990345
