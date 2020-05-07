@@ -44,8 +44,8 @@ ansible-playbook swarm.yaml -i inventory.ini
 ## Service Deployment (Visualizer, Spark, JupyterLab)
 
 <div align="center">
-  <a href="https://www.youtube.com/watch?v=ovio0wvV_Qs">
-    <img src="https://img.youtube.com/vi/ovio0wvV_Qs/0.jpg" alt="PiCluster Service Deployment" style="width:50%;">
+  <a href="https://www.youtube.com/watch?v=Tj-Rb9JvQ7w">
+    <img src="https://img.youtube.com/vi/Tj-Rb9JvQ7w/0.jpg" alt="PiCluster Service Deployment" style="width:50%;">
   </a>
 </div>
 
