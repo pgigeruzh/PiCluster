@@ -1,19 +1,14 @@
 # Exercises
 
-- Table of Contents
-  * [Cluster Setup](#cluster-setup)
-  * [Service Deployment (Visualizer, Spark, JupyterLab)](#service-deployment--visualizer--spark--jupyterlab-)
-  * [Introduction to Spark](#introduction-to-spark)
-  * [Testing Resilience](#resilience-testing)
-
 These exercises are based on the following hostnames and IP addresses. Please adjust them to your specific hardware setup.
-
 | Hostname                                | IP Address    |
 | --------------------------------------- | ------------- |
 | cluster1raspberry0 (**master**/manager) | 192.168.2.250 |
 | cluster1raspberry1 (**slave**/worker)   | 192.168.2.251 |
 | cluster1raspberry2 (**slave**/worker)   | 192.168.2.252 |
 | cluster1raspberry3 (**slave**/worker)   | 192.168.2.253 |
+
+
 
 ## Cluster Setup
 
@@ -47,6 +42,8 @@ ansible-playbook swarm.yaml -i inventory.ini
 
 
 ## Service Deployment (Visualizer, Spark, JupyterLab)
+
+[![](ReadMe.assets/0.jpg)](http://www.youtube.com/watch?v=ovio0wvV_Qs "PiCluster Service Deployment")
 
 To deploy a service on your cluster, you have to **use ssh and connect to your master** (192.168.2.250) because services can't be deployed on a worker node. First, it is useful to deploy a monitoring tool called **Visualizer** as shown below. Because of the port mapping (--publish), you can directly access the Visualizer from any browser (visit 192.168.2.250:80).
 
