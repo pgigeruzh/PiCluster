@@ -12,6 +12,12 @@ These exercises are based on the following hostnames and IP addresses. Please ad
 
 ## Cluster Setup
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=-xZRUxrKbsY">
+    <img src="https://img.youtube.com/vi/-xZRUxrKbsY/0.jpg" alt="PiCluster Setup" style="width:50%;">
+  </a>
+</div>
+
 First, you have to install [Raspbian](https://www.raspberrypi.org/downloads/raspbian/) on all Raspberry Pi e.g. using [Etcher](https://www.balena.io/etcher/). Then, you have boot the Raspberry Pi, set a **unique hostname and IP address** (if the router supports it, we recommend to fix the DHCP address instead of a static IP for portability reasons) and **enable ssh**. It is currently not possible to change the hostname without booting the Raspberry Pi which is why the steps can't be automated.
 
 ```bash
