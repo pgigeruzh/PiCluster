@@ -22,6 +22,9 @@ library(ggplot2)
 library(gridExtra)
 library(scales)
 
+# set theme
+theme_set(theme_linedraw())
+
 # plot 1
 p1 <- ggplot(dd[read_only==FALSE], aes(x=benchmark_description, y=transactions_per_second, colour=clients)) + geom_boxplot() + xlab("Postgres Read-Write Benchmark") + ylab("Transactions Per Second") + scale_x_discrete(labels = wrap_format(12))
 # plot 2

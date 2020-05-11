@@ -1,5 +1,5 @@
 ---
-title: "PySpark-Benchmark"
+title: "32 bit vs 64 bit"
 output: pdf_document
 ---
 
@@ -27,10 +27,8 @@ theme_set(theme_linedraw())
 
 # plot 1
 dd1 <- dd[, list(seconds=mean(seconds)), by=list(workers, platform)]
-ggplot(dd1, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + expand_limits(x = 0, y = 0) + xlab("Workers") + ylab("Average Benchmark Duration (Seconds)")
+ggplot(dd1, aes(x=platform, y=seconds, fill=platform)) + geom_bar(stat="identity") + xlab("Platform") + ylab("Average Benchmark Duration (Seconds)")
 # plot 2
 dd2 <- dd[, list(seconds=mean(seconds)), by=list(benchmark, workers, platform)]
-ggplot(dd2, aes(x=benchmark, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + facet_grid(workers ~ ., scales='fixed') + xlab("Benchmark for each Platform and Worker") + ylab("Average Benchmark Duration (Seconds)") + scale_x_discrete(labels = wrap_format(15))
-
-dd2
+ggplot(dd2, aes(x=benchmark, y=seconds, fill=platform)) + geom_bar(stat="identity", position=position_dodge()) + xlab("Benchmark") + ylab("Average Benchmark Duration (Seconds)") + scale_x_discrete(labels = wrap_format(15))
 ```

@@ -22,12 +22,13 @@ dd$benchmark = with(dd, reorder(benchmark, seconds, median))
 library(ggplot2)
 library(scales)
 
+# set theme
+theme_set(theme_linedraw())
+
 # plot 1
 dd1 <- dd[, list(seconds=mean(seconds)), by=list(workers, platform)]
 ggplot(dd1, aes(x=workers, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + xlab("Workers") + ylab("Average Benchmark Duration (Seconds)")
 # plot 2
-dd2 <- dd[, list(seconds=mean(seconds)), by=list(benchmark, workers, platform)]
-ggplot(dd2, aes(x=benchmark, y=seconds, group=platform, color=platform)) + geom_point() + geom_line() + facet_grid(workers ~ ., scales='fixed') + xlab("Benchmark for each Platform and Worker") + ylab("Average Benchmark Duration (Seconds)")
-
-dd2
+dd2 <- dd[, list(seconds=mean(seconds)), by=list(benchmark, platform)]
+ggplot(dd2, aes(x=benchmark, y=seconds, fill=platform)) + geom_bar(stat="identity", position=position_dodge()) + xlab("Benchmark") + ylab("Average Benchmark Duration (Seconds)") + scale_x_discrete(labels = wrap_format(15))
 ```
