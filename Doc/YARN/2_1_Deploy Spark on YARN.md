@@ -43,6 +43,13 @@ spark.history.ui.port            18080
 spark.driver.memoryOverhead	     1024
 
 ```
+Create the log in the HDFS directory
+
+```bash
+hdfs dfs -mkdir /spark-logs
+```
+
+
 If there's a SPARK request, which needs more memory than allowed, YARN wil reject creation of a container
 Thus I have set some ressource limitations (above). Must be also done for YARN. 
 ```bash
