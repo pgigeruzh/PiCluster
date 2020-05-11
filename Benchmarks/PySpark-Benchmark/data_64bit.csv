@@ -1,0 +1,43 @@
+﻿platform;run;workers;benchmark;seconds
+kubex32;1;1;Group By;52.54069648802397
+kubex32;1;1;Repartition;46.18365151499165
+kubex32;1;1;Inner join;43.96897138498025
+kubex32;1;1;Broadcast inner join;32.80337197100744
+kubex32;1;1;SHA-512;46.2887271780055
+kubex32;1;1;Calculate Pi;19.960148562997347
+kubex32;1;1;Calculate Pi dataframe;6.559794467000756
+kubex32;2;1;Group By;52.05094241400366
+kubex32;2;1;Repartition;57.4251334569999
+kubex32;2;1;Inner join;40.59854387497762
+kubex32;2;1;Broadcast inner join;35.82651177200023
+kubex32;2;1;SHA-512;45.71131361401058
+kubex32;2;1;Calculate Pi;18.83315405700705
+kubex32;2;1;Calculate Pi dataframe;6.5635990950104315
+kubex32;3;1;Group By;52.60237326801871
+kubex32;3;1;Repartition;46.690405739005655
+kubex32;3;1;Inner join;41.69216701298137
+kubex32;3;1;Broadcast inner join;32.79494199398323
+kubex32;3;1;SHA-512;45.12509438500274
+kubex32;3;1;Calculate Pi;19.623045860993443
+kubex32;3;1;Calculate Pi dataframe;7.331829066999489
+kubex64;1;1;Group By;66.99604955299947
+kubex64;1;1;Repartition;26.020244031999027
+kubex64;1;1;Inner join;32.34013452399995
+kubex64;1;1;Broadcast inner join;28.7407707880011
+kubex64;1;1;SHA-512;45.465199708998625
+kubex64;1;1;Calculate Pi;28.976493569000013
+kubex64;1;1;Calculate Pi dataframe;4.2009828010013734
+kubex64;2;1;Group By;58.19945184599965
+kubex64;2;1;Repartition;23.156096282000362
+kubex64;2;1;Inner join;27.58806408899909
+kubex64;2;1;Broadcast inner join;24.670879978999437
+kubex64;2;1;SHA-512;44.87567824799953
+kubex64;2;1;Calculate Pi;29.442341644999033
+kubex64;2;1;Calculate Pi dataframe;4.787145381998926
+kubex64;3;1;Group By;57.939005722999354
+kubex64;3;1;Repartition;23.07221962299991
+kubex64;3;1;Inner join;28.53743191600006
+kubex64;3;1;Broadcast inner join;25.1335833560006
+kubex64;3;1;SHA-512;45.409022294999886
+kubex64;3;1;Calculate Pi;29.692069741000523
+kubex64;3;1;Calculate Pi dataframe;4.2345134370007145
