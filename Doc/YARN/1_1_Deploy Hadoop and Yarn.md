@@ -1,7 +1,13 @@
-# Installation of Hadoop on 1 Master and 2 Slaves
+# Installation of Hadoop on Master and Slaves
 # Part 1: Installing Hadoop on MasterNode
 
+Following IP's were used to set up the Master and the corresponding slaves
+
 (cluster3raspberry0 --> IP: 192.168.1.187)
+(cluster3raspberry1 --> IP: 192.168.1.188)
+(cluster3raspberry2 --> IP: 192.168.1.189)
+(cluster3raspberry3 --> IP: 192.168.1.192)
+
 
 Creating user "hduser" and creating ssh keys
 
@@ -45,6 +51,9 @@ export YARN_HOME=$HADOOP_HOME
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+export SPARK_HOME=/opt/spark
+export PATH=$PATH:$SPARK_HOME/bin
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 #apply .bashrc file
 source ~/.bashrc  
@@ -54,7 +63,6 @@ hadoop version
 
 ```
 Configuring Hadoop on Master
-
 
 ```bash
 # Go to configuration directory and set JAVA_HOME variable
@@ -100,7 +108,7 @@ nano hdfs-site.xml
 
 
 ```bash
-# Create and edit mapred-site.xml
+# Create and edit mapred-site.xml (only needed if you want to perform MapReduce tasks)
 
 cp mapred-site.xml.template mapred-site.xml  
 nano mapred-site.xml
@@ -170,18 +178,18 @@ nano mapred-site.xml
     <value>4</value>
   </property> 
 
-<property>  
-<name>yarn.resourcemanager.resource-tracker.address</name>  
-<value>cluster3raspberry0:8025</value>  
-</property>  
-<property>  
-<name>yarn.resourcemanager.scheduler.address</name>  
-<value>cluster3raspberry0:8030</value>  
-</property>  
-<property>  
-<name>yarn.resourcemanager.address</name>  
-<value>cluster3raspberry0:8045</value>  
-</property> 
+  <property>  
+   <name>yarn.resourcemanager.resource-tracker.address</name>  
+   <value>cluster3raspberry0:8025</value>  
+   </property>  
+  <property>  
+    <name>yarn.resourcemanager.scheduler.address</name>  
+    <value>cluster3raspberry0:8030</value>  
+  </property>  
+  <property>  
+   <name>yarn.resourcemanager.address</name>  
+    <value>cluster3raspberry0:8045</value>  
+  </property> 
 
 </configuration>
 
@@ -196,7 +204,7 @@ sudo chown hduser:hadoop /hdfs/tmp
 chmod 750 /hdfs/tmp  
 hdfs namenode -format 
 
-Create  file:/hdfs/tmp/dfs/data on master (since it should be also a worker)
+#Create  file:/hdfs/tmp/dfs/data on master (since it should be also a worker)
 
 sudo mkdir -p /hdfs/tmp/dfs/data
 sudo chown hduser:hadoop /hdfs/tmp/
@@ -318,19 +326,18 @@ sudo nano yarn-site.xml
     <value>false</value>
   </property>
 
-<property>
-<name>yarn.resourcemanager.resource-tracker.address</name>
-<value>cluster3raspberry0:8025</value>
-</property>
-<property>
-<name>yarn.resourcemanager.scheduler.address</name>
-<value>cluster3raspberry0:8030</value>
-</property>
-<property>
-<name>yarn.resourcemanager.address</name>
-<value>cluster3raspberry0:8040</value>
-</property>
-
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>cluster3raspberry0:8025</value>
+    </property>
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+   <value>cluster3raspberry0:8030</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>cluster3raspberry0:8040</value>
+  </property>
 
 </configuration>
 
@@ -338,15 +345,15 @@ sudo nano yarn-site.xml
 
 ```bash
 <configuration>
-<property>  
-  <name>fs.default.name</name>
-  <value>hdfs://cluster3raspberry0:9000</value>
-</property>  
-<property>  
-  <name>hadoop.tmp.dir</name>
-  <value>/hdfs/tmp</value>
-</property> 
-</configuration>
+  <property>  
+    <name>fs.default.name</name>
+   <value>hdfs://cluster3raspberry0:9000</value>
+  </property>  
+  <property>  
+    <name>hadoop.tmp.dir</name>
+    <value>/hdfs/tmp</value>
+  </property> 
+  </configuration>
 
 
 ```
