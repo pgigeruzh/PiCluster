@@ -12,7 +12,7 @@ mv spark-2.4.5-bin-hadoop2.7.tgz spark
 
 
 ```bash
-# set additional environmental variables to integrate Spark with Yarn
+# following additional environmental variables are needed, to integrate Spark with Yarn (should be already done from part 1)
 nano ~/.bashrc 
 
 export SPARK_HOME=/opt/spark-3.0.0-preview2-bin-hadoop2.7
@@ -33,27 +33,14 @@ mv $SPARK_HOME/conf/spark-defaults.conf.template $SPARK_HOME/conf/spark-defaults
 spark.master                     yarn
 spark.eventLog.enabled           true
 spark.eventLog.dir               hdfs://cluster3raspberry0:9000/spark-logs
-#spark.eventLog.dir              hdfs://raspberrypi4:8021/directory
 
-# spark.serializer               org.apache.spark.serializer.KryoSerializer
-#spark.driver.memory             512m
-#spark.executor.extraJavaOptions -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
-#spark.yarn.am.memory		 465m
 spark.executor.memory            640m
 spark.history.provider           org.apache.spark.deploy.history.FsHistoryProvider
 spark.history.fs.logDirectory    hdfs://cluster3raspberry0:9000/spark-logs
 spark.history.fs.update.interval 10s
 spark.history.ui.port            18080
 
-#spark.dynamicAllocation.enabled true
-#spark.shuffle.service.enabled true
-
-
-spark.driver.memoryOverhead	 1024
-#spark.executor.memoryOverhead	 512
-#spark.driver.cores               2
-#spark.executor.cores             4
-
+spark.driver.memoryOverhead	     1024
 
 ```
 If there's a SPARK request, which needs more memory than allowed, YARN wil reject creation of a container
@@ -93,10 +80,5 @@ Thus I have set some ressource limitations (above). Must be also done for YARN.
   </property> 
   
 </configuration>
-
-```
-
-```bash
-# 
 
 ```
