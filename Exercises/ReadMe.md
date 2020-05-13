@@ -120,6 +120,16 @@ docker service rm your-service-name
 
 Visit JupyterLab (192.168.2.250:8888) and run [this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/template.ipynb) template. You should see the output: "Pi is roughly 3.156360". If you prefer to use spark-submit, you can do so in the terminal. Please note that **all files should be stored in /gfs** because the folder is synced across all nodes.
 
+In case you're not familiar with the Pyspark syntax and the foundations of Spark RDD's and Dataframes, just have a look on
+[this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/Movielens_exercises.ipynb) Jupyter Notebook. This should provide you a guided introduction to some basic operations in Spark based on the Movielens Dataset. 
+
+The provided Movielens exercise will help you to:
+*  Read and understand the schema of our Movielens dataset
+*  Calculate summary statistics
+*  Learn how to perform joins and aggregations using PySpark
+*  Understand fundamental RDD transformations like **map(), flatMap() or reduceByKey()**
+
+This will give you the possibility to write your own code for testing the resilience of the cluster in the next exercise. Of course, you can adapt the provided examples and try to write codes, which need high computational resources to process the results. 
 
 
 ## Testing Resilience
