@@ -14,7 +14,7 @@ These exercises are based on the following hostnames and IP addresses. Please ad
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=-xZRUxrKbsY">
-    <img src="https://img.youtube.com/vi/-xZRUxrKbsY/0.jpg" alt="PiCluster Setup" style="width:50%;">
+    <img src="images/setup.jpg" alt="PiCluster Setup" style="width:50%;">
   </a>
 </div>
 
@@ -51,9 +51,10 @@ ansible-playbook swarm.yaml -i inventory.ini
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=Tj-Rb9JvQ7w">
-    <img src="https://img.youtube.com/vi/Tj-Rb9JvQ7w/0.jpg" alt="PiCluster Service Deployment" style="width:50%;">
+    <img src="images/deploy.png" alt="PiCluster Service Deployment" style="width:50%;">
   </a>
 </div>
+
 
 To deploy a service on your cluster, you have to **use ssh and connect to your master** (192.168.2.250) because services can't be deployed on a worker node. First, it is useful to deploy a monitoring tool called **Visualizer** as shown below. Because of the port mapping (--publish), you can directly access the Visualizer from any browser (visit 192.168.2.250:80).
 
@@ -123,9 +124,10 @@ Visit JupyterLab (192.168.2.250:8888) and run [this](https://github.com/pgigeruz
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=4scaV421mQo">
-    <img src="https://img.youtube.com/vi/4scaV421mQo/0.jpg" alt="PiCluster Resilience" style="width:50%;">
+    <img src="images/resilience.jpg" alt="PiCluster Resilience" style="width:50%;">
   </a>
 </div>
+
 
 For testing the resilience of the cluster, you can try your own code or use the template below. The template calculates the mean, standard deviation, min, max, and count of the rating columns and parallelizes well. Other tasks might not parallelize well, hence, they do not profit from additional workers.
 
