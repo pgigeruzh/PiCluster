@@ -14,7 +14,7 @@ These exercises are based on the following hostnames and IP addresses. Please ad
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=-xZRUxrKbsY">
-    <img src="images/setup.jpg" alt="PiCluster Setup" style="width:50%;">
+    <img src="images/setup.png" alt="PiCluster Setup" style="width:50%;">
   </a>
 </div>
 
@@ -124,7 +124,7 @@ Visit JupyterLab (192.168.2.250:8888) and run [this](https://github.com/pgigeruz
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=4scaV421mQo">
-    <img src="images/resilience.jpg" alt="PiCluster Resilience" style="width:50%;">
+    <img src="images/resilience.png" alt="PiCluster Resilience" style="width:50%;">
   </a>
 </div>
 
