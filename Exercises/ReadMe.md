@@ -1,6 +1,6 @@
 # Exercises
 
-These exercises are based on the following hostnames and IP addresses. Please adjust them to your specific hardware setup.
+These exercises are based on the following hostnames and IP addresses. Please adjust them to your specific hardware setup. It is assumed that the IP addresses are fixed e.g. using a router with static DHCP.
 | Hostname                                | IP Address    |
 | --------------------------------------- | ------------- |
 | cluster1raspberry0 (**master**/manager) | 192.168.2.250 |
@@ -14,12 +14,11 @@ These exercises are based on the following hostnames and IP addresses. Please ad
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=-xZRUxrKbsY">
-    <img src="images/setup.png" alt="PiCluster Setup" style="width:40%;">
+    <img src="images/setup.png" alt="PiCluster Setup" style="width:30%;">
   </a>
 </div>
 
-
-First, you have to install [Raspbian](https://www.raspberrypi.org/downloads/raspbian/) on all Raspberry Pi e.g. using [Etcher](https://www.balena.io/etcher/). Then, you have boot the Raspberry Pi, set a **unique hostname and IP address** (if the router supports it, we recommend to fix the DHCP address instead of a static IP for portability reasons) and **enable ssh**. It is currently not possible to change the hostname without booting the Raspberry Pi which is why the steps can't be automated.
+First, you have to install [Raspbian](https://www.raspberrypi.org/downloads/raspbian/) on all Raspberry Pi e.g. using [Etcher](https://www.balena.io/etcher/). Then, you have to boot the Raspberry Pi (with keyboard, monitor), set a **unique hostname** and **enable ssh**. It is currently not possible to change the hostname without booting the Raspberry Pi which is why the steps can't be automated.
 
 ```bash
 # open raspi-config
@@ -52,9 +51,10 @@ ansible-playbook swarm.yaml -i inventory.ini
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=Tj-Rb9JvQ7w">
-    <img src="images/deployment.png" alt="PiCluster Service Deployment" style="width:40%;">
+    <img src="images/deployment.png" alt="PiCluster Service Deployment" style="width:30%;">
   </a>
 </div>
+
 
 
 
@@ -118,27 +118,31 @@ docker service rm your-service-name
 
 ## Introduction to Spark
 
-Visit JupyterLab (192.168.2.250:8888) and run [this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/template.ipynb) template. You should see the output: "Pi is roughly 3.156360". If you prefer to use spark-submit, you can do so in the terminal. Please note that **all files should be stored in /gfs** because the folder is synced across all nodes.
+In this exercise, you will use PySpark and the [MovieLens 20M Dataset](https://grouplens.org/datasets/movielens/20m/) on movie ratings to answer several questions. These exercises promote "Learning by Doing" which means that we guide you through the steps but you have to do them yourself. Sometimes, this means that you have to use Google, Stackoverflow, or the [PySpark Documentation](https://spark.apache.org/docs/latest/api/python/pyspark.html).
 
-In case you're not familiar with the Pyspark syntax and the foundations of Spark RDD's and Dataframes, just have a look on
-[this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/Movielens_exercises.ipynb) Jupyter Notebook. This should provide you a guided introduction to some basic operations in Spark based on the Movielens Dataset. 
+First, **visit JupyterLab** (192.168.2.250:8888) and upload the [MovieLens 20M Dataset](https://grouplens.org/datasets/movielens/20m/) into **/gfs** (default view in the file explorer). Alternatively, run the following commands in the JupyterLab terminal:
 
-The provided Movielens exercise will help you to:
-*  Read and understand the schema of our Movielens dataset
-*  Calculate summary statistics
-*  Learn how to perform joins and aggregations using PySpark
-*  Understand fundamental RDD transformations like **map(), flatMap() or reduceByKey()**
+```bash
+# change directory
+cd /gfs
+# install wget
+apt install wget -y
+# download and unzip MovieLens dataset
+wget http://files.grouplens.org/datasets/movielens/ml-20m.zip
+unzip ml-20m.zip
+```
 
-This will give you the possibility to write your own code for testing the resilience of the cluster in the next exercise. Of course, you can adapt the provided examples and try to write codes, which need high computational resources to process the results. 
+Now, run [this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/Movielens_exercises.ipynb) Jupyter Notebook and follow the instructions. 
 
 
 ## Testing Resilience
 
 <div align="center">
   <a href="https://www.youtube.com/watch?v=4scaV421mQo">
-    <img src="images/resilience.png" alt="PiCluster Resilience" style="width:40%;">
+    <img src="images/resilience.png" alt="PiCluster Resilience" style="width:30%;">
   </a>
 </div>
+
 
 For testing the resilience of the cluster, you can try your own code or use the template below. The template calculates the mean, standard deviation, min, max, and count of the rating columns and parallelizes well. Other tasks might not parallelize well, hence, they do not profit from additional workers.
 
