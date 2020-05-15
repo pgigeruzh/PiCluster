@@ -54,10 +54,6 @@ ansible-playbook swarm.yaml -i inventory.ini
     <img src="images/deployment.png" alt="PiCluster Service Deployment" style="width:30%;">
   </a>
 </div>
-
-
-
-
 To deploy a service on your cluster, you have to **use ssh and connect to your master** (192.168.2.250) because services can't be deployed on a worker node. First, it is useful to deploy a monitoring tool called **Visualizer** as shown below. Because of the port mapping (--publish), you can directly access the Visualizer from any browser (visit 192.168.2.250:80).
 
 ```bash
@@ -118,6 +114,12 @@ docker service rm your-service-name
 
 ## Introduction to Spark
 
+<div align="center">
+  <a href="https://www.youtube.com/watch?v=vHBhx6Gcr64">
+    <img src="images/spark.png" alt="PiCluster Resilience" style="width:30%;">
+  </a>
+</div>
+
 In this exercise, you will use PySpark and the [MovieLens 20M Dataset](https://grouplens.org/datasets/movielens/20m/) on movie ratings to answer several questions. These exercises promote "Learning by Doing" which means that we guide you through the steps but you have to do them yourself. Sometimes, this means that you have to use Google, Stackoverflow, or the [PySpark Documentation](https://spark.apache.org/docs/latest/api/python/pyspark.html).
 
 First, **visit JupyterLab** (192.168.2.250:8888) and upload the [MovieLens 20M Dataset](https://grouplens.org/datasets/movielens/20m/) into **/gfs** (default view in the file explorer). Alternatively, run the following commands in the JupyterLab terminal:
@@ -135,6 +137,7 @@ unzip ml-20m.zip
 Now, run [this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/Movielens_exercises.ipynb) Jupyter Notebook and follow the instructions. 
 
 
+
 ## Testing Resilience
 
 <div align="center">
@@ -142,8 +145,6 @@ Now, run [this](https://github.com/pgigeruzh/PiCluster/blob/master/Exercises/Mov
     <img src="images/resilience.png" alt="PiCluster Resilience" style="width:30%;">
   </a>
 </div>
-
-
 For testing the resilience of the cluster, you can try your own code or use the template below. The template calculates the mean, standard deviation, min, max, and count of the rating columns and parallelizes well. Other tasks might not parallelize well, hence, they do not profit from additional workers.
 
 ```python
