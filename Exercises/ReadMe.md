@@ -54,6 +54,7 @@ ansible-playbook swarm.yaml -i inventory.ini
     <img src="images/deployment.png" alt="PiCluster Service Deployment" style="width:30%;">
   </a>
 </div>
+
 To deploy a service on your cluster, you have to **use ssh and connect to your master** (192.168.2.250) because services can't be deployed on a worker node. First, it is useful to deploy a monitoring tool called **Visualizer** as shown below. Because of the port mapping (--publish), you can directly access the Visualizer from any browser (visit 192.168.2.250:80).
 
 ```bash

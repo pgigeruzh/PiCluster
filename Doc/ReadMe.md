@@ -1,7 +1,5 @@
 # Documentation
 
-This repo contains the following:
-
 | Directory  | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
 | Kubernetes | Contains information on how to setup Kubernetes on a Raspberry Pi |
