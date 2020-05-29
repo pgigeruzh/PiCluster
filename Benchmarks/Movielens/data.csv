@@ -149,33 +149,33 @@ kubernetes;3;3;Map Reduce;107.43707370758057
 kubernetes;3;3;SQL;62.79580879211426
 kubernetes;3;3;Recommendation;201.0461721420288
 kubernetes;3;3;Total;383.0621438026428
-kubernetes;1;2;Load DB;11.564919471740723
-kubernetes;1;2;Map Reduce;188.20567631721497
-kubernetes;1;2;SQL;105.58942818641663
-kubernetes;1;2;Recommendation;325.1500632762909
-kubernetes;1;2;Total;631.1182136535645
-kubernetes;2;2;Load DB;11.491440773010254
-kubernetes;2;2;Map Reduce;171.2069718837738
-kubernetes;2;2;SQL;97.63660454750061
-kubernetes;2;2;Recommendation;310.7817611694336
-kubernetes;2;2;Total;592.0349998474121
-kubernetes;3;2;Load DB;11.541891813278198
-kubernetes;3;2;Map Reduce;154.92765545845032
-kubernetes;3;2;SQL;92.24384927749634
-kubernetes;3;2;Recommendation;322.61294436454773
-kubernetes;3;2;Total;581.7842955589294
-kubernetes;1;1;Load DB;11.473044157028198
-kubernetes;1;1;Map Reduce;361.096171855926
-kubernetes;1;1;SQL;203.15111255645752
-kubernetes;1;1;Recommendation;619.9829797744751
-kubernetes;1;1;Total;1196.339435338974
-kubernetes;2;1;Load DB;11.539820432662964
-kubernetes;2;1;Map Reduce;363.0211374759674
-kubernetes;2;1;SQL;201.28413844108582
-kubernetes;2;1;Recommendation;620.1025824546814
-kubernetes;2;1;Total;1196.3169553279877
-kubernetes;3;1;Load DB;11.53067922592163
-kubernetes;3;1;Map Reduce;293.64928913116455
-kubernetes;3;1;SQL;178.65356302261353
-kubernetes;3;1;Recommendation;614.0073726177216
-kubernetes;2;1;Total;1098.932345867157
+kubernetes;1;2;Load DB;11.5397176
+kubernetes;1;2;Map Reduce;151.9705236
+kubernetes;1;2;SQL;91.90104687
+kubernetes;1;2;Recommendation;318.9754597
+kubernetes;1;2;Total;574.8925999
+kubernetes;2;2;Load DB;11.56448121
+kubernetes;2;2;Map Reduce;168.1808596
+kubernetes;2;2;SQL;89.3050304
+kubernetes;2;2;Recommendation;311.7956161
+kubernetes;2;2;Total;581.3104291
+kubernetes;3;2;Load DB;11.53019739
+kubernetes;3;2;Map Reduce;154.2867464
+kubernetes;3;2;SQL;91.98813075
+kubernetes;3;2;Recommendation;320.6860361
+kubernetes;3;2;Total;578.8181549
+kubernetes;1;1;Load DB;11.35916697
+kubernetes;1;1;Map Reduce;294.378089
+kubernetes;1;1;SQL;165.4779313
+kubernetes;1;1;Recommendation;535.6554584
+kubernetes;1;1;Total;1007.193352
+kubernetes;2;1;Load DB;11.56890692
+kubernetes;2;1;Map Reduce;291.4920099
+kubernetes;2;1;SQL;173.268779
+kubernetes;2;1;Recommendation;546.078296
+kubernetes;2;1;Total;1022.863763
+kubernetes;3;1;Load DB;11.58289499
+kubernetes;3;1;Map Reduce;293.6492891
+kubernetes;3;1;SQL;178.2804762
+kubernetes;3;1;Recommendation;541.7116439
+kubernetes;3;1;Total;1025.603993
